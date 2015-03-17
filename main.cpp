@@ -28,13 +28,13 @@ int main(int argc, char *argv[])
 		-0.5f, -0.5f
 	};
 	
-	GLuint vbo;
+	/*GLuint vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);*/
 	
 	
-	//Model triangle(vertices);
+	Model triangle(vertices,sizeof(vertices));
 
 	{//scope of the shader program
 

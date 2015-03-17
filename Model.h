@@ -5,7 +5,7 @@
 class Model
 {
 public:
-	Model(GLfloat* vertices);
+	Model(GLfloat* vertices, int size);
 	
 	//void rotate(float alpha, float beta, float gamma);
 	//void translate(float dx, float dy, float dz);

@@ -1,12 +1,12 @@
 #include "Model.h"
 
 
-Model::Model(GLfloat* vertices)
+Model::Model(GLfloat* vertices, int size)
 {
 	glGenBuffers(1, &m_vbo);
 	m_vertices = vertices;
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(m_vertices), m_vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, size, m_vertices, GL_STATIC_DRAW);
 
 }
 
