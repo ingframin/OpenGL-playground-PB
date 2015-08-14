@@ -3,73 +3,88 @@
 #include "Display.h"
 #include "ShaderProgram.h"
 #include "Model.h"
+#include "math_utils.h"
+
+
+enum AttribIDs{
+	vPosition = 0
+};
+
 
 
 int main(int argc, char *argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
-
 	////glew init
 	
 	Display gameDisplay("Monica's Bubbles", 800, 600);
 
-	// Create Vertex Array Object
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-
-	
-
-	GLfloat vertices[] = {
-		0.0f, 0.5f,
-		0.5f, -0.5f,
-		-0.5f, -0.5f
-	};
-	
-	/*GLuint vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);*/
-	
-	
-	Model triangle(vertices,sizeof(vertices));
-
-	{//scope of the shader program
-
+	GLfloat vertices[26] = {
+		0.0f,0.0f,
+		1.000f,	0.000f,
+		0.866f,	0.500f,
+		0.500f,	0.866f,
+		0.000f,	1.000f,
+		-0.500f,0.866f,
+		-0.866f,0.500f,
+		-1.000f,0.000f,
+		-0.866f,-0.500f,
+		-0.500f,-0.866f,
+		0.000f,-1.000f,
+		0.500f,-0.866f,
+		0.866f, -0.500f
 		
-		//Init Shader program
-		ShaderProgram& shp = ShaderProgram();//I know this is too javish...
+	};
 
-		shp.loadShader("./shaders/vertex.glsl", GL_VERTEX_SHADER);
-		shp.loadShader("./shaders/fragment.glsl", GL_FRAGMENT_SHADER);
+	GLuint elements[] = {
+		0, 12, 11, 10,9,8,7,6,5,4,3,2,1,12
+	};
 
-		shp.linkProgram();
+	GLuint NumElements = 14;
+	
 
-		glUseProgram(shp.getProgramID());
+	Model triangles(vertices,26,elements,NumElements);
+	
+	//Init Shader program
+	ShaderProgram& shp = ShaderProgram();
 
-		// Specify the layout of the vertex data
-		GLint posAttrib = glGetAttribLocation(shp.getProgramID(), "position");
-		glEnableVertexAttribArray(posAttrib);
-		glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	shp.loadShader("./shaders/vertex.glsl", GL_VERTEX_SHADER);
+	shp.loadShader("./shaders/fragment.glsl", GL_FRAGMENT_SHADER);
 
-		SDL_Event windowEvent;
-		while (true)
+	shp.linkProgram();
+
+	glUseProgram(shp.getProgramID());
+
+	GLuint transform = glGetUniformLocation(shp.getProgramID(), "transform");
+
+	
+	glVertexAttribPointer(vPosition, 2, GL_FLOAT, GL_FALSE,0,nullptr);
+	glEnableVertexAttribArray(vPosition);
+	SDL_Event windowEvent;
+	unsigned int lastTime = 0;
+	
+	while (true)
+	{
+		
+		if (SDL_PollEvent(&windowEvent))
 		{
-			if (SDL_PollEvent(&windowEvent))
-			{
-				if (windowEvent.type == SDL_QUIT) break;
-			}
-			gameDisplay.clear(0.0f,0.0f,0.0f,1.0f);
-			gameDisplay.update();
+			if (windowEvent.type == SDL_QUIT) break;
 		}
+		gameDisplay.clear(1.0f,0.0f,0.0f,1.0f);
+	
+		triangles.draw();
+		//glUniformMatrix4fv(transform, 1, GL_FALSE, glm::value_ptr(trs));
+		glFlush();
+		gameDisplay.update();
+		while ((SDL_GetTicks() - lastTime) < 16){
+			continue;
+		}
+		lastTime = SDL_GetTicks();
+		
 
-	}//end scope of the shader program
+	}
 
-	//glDeleteBuffers(1, &vbo);
-
-	glDeleteVertexArrays(1, &vao);
 	
 	gameDisplay.dispose();
 	

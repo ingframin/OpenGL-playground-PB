@@ -1,24 +1,29 @@
 #pragma once
-#include<string>
 #include <GL/glew.h>
+#include "math_utils.h"
+
 
 class Model
 {
 public:
-	Model(GLfloat* vertices, int size);
-	
-	//void rotate(float alpha, float beta, float gamma);
-	//void translate(float dx, float dy, float dz);
-	
+	Model(GLfloat vertices[], GLuint vsize, GLuint* elements, GLuint esize);
 	~Model();
+	void draw();
+	mat4& rotate(float alpha, float beta, float gamma);
+	mat4& translate(float dx, float dy, float dz);
+	mat4& scale(float s);
 
 private:
+	GLuint vao;
 
-	GLuint m_vbo;
-	GLfloat* m_vertices;
-	float* m_colors;
-	float m_Xcenter;
-	float m_Ycenter;
+	GLuint ebo;
+	GLuint* elements;
+	GLuint esize;
+
+	GLuint vbo;
+	GLfloat* vertices;
+	GLuint vsize;
+	
 
 };
 

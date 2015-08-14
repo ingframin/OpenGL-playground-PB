@@ -162,6 +162,7 @@
     <ClInclude Include="include\SDL2\SDL_types.h" />
     <ClInclude Include="include\SDL2\SDL_version.h" />
     <ClInclude Include="include\SDL2\SDL_video.h" />
+    <ClInclude Include="math_utils.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ShaderProgram.h" />
   </ItemGroup>
@@ -178,6 +179,7 @@
   <ItemGroup>
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="math_utils.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
   </ItemGroup>
