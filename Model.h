@@ -1,19 +1,23 @@
 #pragma once
+#include <vector>
+#include <string>
 #include <GL/glew.h>
 #include "math_utils.h"
-
+#include "ShaderProgram.h"
+using namespace std;
 
 class Model
 {
 public:
-	Model(GLfloat vertices[], GLuint vsize, GLuint* elements, GLuint esize);
+	Model(std::vector<GLfloat> vertices, GLuint vsize, GLuint* elements, GLuint esize);
 	~Model();
-	void draw();
-	mat4& rotate(float alpha, float beta, float gamma);
-	mat4& translate(float dx, float dy, float dz);
-	mat4& scale(float s);
+	void loadShaders(const string vertex_shader, const string fragment_shader);
+	void draw() const;
+	
+	
 
 private:
+	//Geometry data
 	GLuint vao;
 
 	GLuint ebo;
@@ -21,9 +25,8 @@ private:
 	GLuint esize;
 
 	GLuint vbo;
-	GLfloat* vertices;
+	std::vector<GLfloat> vertices;
 	GLuint vsize;
 	
-
 };
 

@@ -29,7 +29,7 @@ ShaderProgram::~ShaderProgram()
 	glDeleteProgram(m_program);
 }
 
-void ShaderProgram::loadShader(const std::string& fileName, GLenum shaderType)
+void ShaderProgram::loadShader(const std::string& fileName, const GLenum shaderType)
 {
 	std::ifstream file;
 	file.open((fileName).c_str());
@@ -70,7 +70,7 @@ void ShaderProgram::loadShader(const std::string& fileName, GLenum shaderType)
 
 }
 
-GLuint ShaderProgram::getProgramID()
+GLuint ShaderProgram::getProgramID() const
 {
 	return m_program;
 }

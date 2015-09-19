@@ -1,32 +1,43 @@
 #pragma once
 #include <intrin.h>
 #include <cmath>
+#include <vector>
 
 
-class vec4{
-public:
-	vec4(float x, float y, float z, float w);
-	float* operator[](char i);
-	inline float get(unsigned int i);
-	inline void set(unsigned int i, float value);
-	inline float dot_product(vec4& v);
+namespace math_utils{
+	class vec4{
+	public:
+		vec4(float x, float y, float z, float w);
+		float operator[](char i) const;
+		float get(unsigned int i) const;
+		const float* getV()const { return v; }
+		void set(unsigned int i, float value);
+		float dot_product(const vec4& v) const;
 
-	~vec4(){};
-private:
-	float v[4];
-};
+		~vec4(){};
+	private:
+		float v[4];
+	};
 
-class mat4{
-public:
+	class mat4{
+	public:
 
-	mat4(float* mc);
-	
-	mat4& product(mat4& m);
-	vec4& product(vec4& v);
-	float get(unsigned int x, unsigned int y);
-	void set(unsigned int x, unsigned int y, float v);
+		mat4(const float* mc);
+		mat4();
+		mat4 product(const mat4& m) const;
+		vec4 product(const vec4& v) const;
+		const float get(unsigned int x, unsigned int y) const;
+		void set(unsigned int x, unsigned int y, float v);
+		const float* getm() const { return m; }
 
-private:
-	float m[16];
 
-};
+	private:
+		float m[16];
+
+	};
+
+	mat4 rotate(float vx, float vy, float vz, float ang);
+	mat4 translate(float dx, float dy, float dz);
+	mat4 scale(float sx, float sy, float sz);
+}
+

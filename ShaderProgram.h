@@ -8,13 +8,12 @@ class ShaderProgram
 public:
 	ShaderProgram(void);
 	virtual ~ShaderProgram();
-	void loadShader(const std::string& fileName, GLenum shaderType);
+	void loadShader(const std::string& fileName, const GLenum shaderType);
 	void linkProgram();
-	GLuint getProgramID();
-
+	GLuint getProgramID() const;
+	inline void useProgram(){ glUseProgram(m_program); }
 private:
-	
-	
+		
 	GLuint m_program;
 	std::vector<GLuint> m_shaders;
 };

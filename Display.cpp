@@ -29,15 +29,16 @@ void Display::clear(float r, float g, float b, float a){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Display::update(){
+void Display::update() const{
+	glFlush();
 	SDL_GL_SwapWindow(m_window);
 }
 
-void Display::dispose(){
+void Display::dispose() const{
 	SDL_DestroyWindow(m_window);
 	SDL_GL_DeleteContext(m_context);
 }
 
-float Display::getRatio(){
-	return (float)height / (float)width;
+float Display::getRatio() const {
+	return (float)width / (float)height;
 }

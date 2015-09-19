@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include <string>
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
@@ -8,10 +9,10 @@ public:
 	
 	Display(const std::string& title, unsigned int width, unsigned int height);
 	
-	float getRatio();
-	void update();
+	float getRatio() const;
+	void update() const;
 
-	void dispose();
+	void dispose() const;
 	void clear(float r, float g, float b, float a);
 	virtual ~Display();
 

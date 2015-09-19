@@ -97,6 +97,7 @@
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="math_utils.h" />
+    <ClInclude Include="BallShader.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\glew32.lib" />
@@ -114,5 +115,6 @@
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="math_utils.cpp" />
+    <ClCompile Include="BallShader.cpp" />
   </ItemGroup>
 </Project>

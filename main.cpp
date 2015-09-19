@@ -1,16 +1,12 @@
+#include <vector>
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include "Display.h"
-#include "ShaderProgram.h"
+#include "BallShader.h"
 #include "Model.h"
 #include "math_utils.h"
 
-
-enum AttribIDs{
-	vPosition = 0
-};
-
-
+using namespace math_utils;
 
 int main(int argc, char *argv[])
 {
@@ -20,7 +16,7 @@ int main(int argc, char *argv[])
 	
 	Display gameDisplay("Monica's Bubbles", 800, 600);
 
-	GLfloat vertices[26] = {
+	std::vector<GLfloat> vertices = {
 		0.0f,0.0f,
 		1.000f,	0.000f,
 		0.866f,	0.500f,
@@ -42,25 +38,16 @@ int main(int argc, char *argv[])
 	};
 
 	GLuint NumElements = 14;
-	
-
+		
 	Model triangles(vertices,26,elements,NumElements);
+		
+	BallShader& bsp = BallShader("./shaders/vertex.glsl", "./shaders/fragment.glsl");
 	
-	//Init Shader program
-	ShaderProgram& shp = ShaderProgram();
-
-	shp.loadShader("./shaders/vertex.glsl", GL_VERTEX_SHADER);
-	shp.loadShader("./shaders/fragment.glsl", GL_FRAGMENT_SHADER);
-
-	shp.linkProgram();
-
-	glUseProgram(shp.getProgramID());
-
-	GLuint transform = glGetUniformLocation(shp.getProgramID(), "transform");
-
+	bsp.enable();
 	
-	glVertexAttribPointer(vPosition, 2, GL_FLOAT, GL_FALSE,0,nullptr);
-	glEnableVertexAttribArray(vPosition);
+	mat4 rotation = rotate(1.0f, 0.0f, 0.0f,0.0f);
+	mat4 scaling = scale(gameDisplay.getRatio(), 1.0f, 1.0f);
+	
 	SDL_Event windowEvent;
 	unsigned int lastTime = 0;
 	
@@ -74,17 +61,19 @@ int main(int argc, char *argv[])
 		gameDisplay.clear(1.0f,0.0f,0.0f,1.0f);
 	
 		triangles.draw();
-		//glUniformMatrix4fv(transform, 1, GL_FALSE, glm::value_ptr(trs));
-		glFlush();
+	
+		bsp.setTransform(rotation);
+		
+		rotation = scaling.product(rotate(0.0f, 0.0f, 1.0f, 0.001f*lastTime).product(rotate(0.0f, 1.0f, 0.0f, 0.001f*lastTime).product(rotate(1.0f, 0.0f, 0.0f, 0.0f))));
+		
 		gameDisplay.update();
+		
 		while ((SDL_GetTicks() - lastTime) < 16){
 			continue;
 		}
 		lastTime = SDL_GetTicks();
-		
 
 	}
-
 	
 	gameDisplay.dispose();
 	

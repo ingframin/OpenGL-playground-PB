@@ -91,6 +91,7 @@
     <None Include="shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BallShader.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="include\GL\glew.h" />
     <ClInclude Include="include\GL\glxew.h" />
@@ -177,6 +178,7 @@
     <Library Include="lib\SDL2_ttf.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BallShader.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math_utils.cpp" />
