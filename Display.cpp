@@ -4,8 +4,10 @@
 Display::Display(const std::string& title, unsigned int width, unsigned int height)
 {
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetSwapInterval(1);
 	m_window = SDL_CreateWindow(title.c_str(), 100, 100, width, height, SDL_WINDOW_OPENGL);
 	m_context = SDL_GL_CreateContext(m_window);
 	glViewport(0, 0, width, height);
@@ -30,7 +32,7 @@ void Display::clear(float r, float g, float b, float a){
 }
 
 void Display::update() const{
-	glFlush();
+	//glFlush();
 	SDL_GL_SwapWindow(m_window);
 }
 
