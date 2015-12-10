@@ -25,4 +25,5 @@ void BallShader::enable(){
 
 BallShader::~BallShader()
 {
+	
 }

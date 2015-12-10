@@ -96,9 +96,9 @@ int main(int argc, char *argv[])
 
 		gameDisplay.update();
 		
-		/*while ((SDL_GetTicks() - lastTime) < 16){
+		while ((SDL_GetTicks() - lastTime) < 16){
 			continue;
-		}*/
+		}
 		lastTime = SDL_GetTicks();
 
 	}
