@@ -1,2 +1,2 @@
-# Monica-s-Bubbles
-a puzzle bubble remake with c++ and OpenGL
+# OpenGL playground
+Project to experiment while I study c++ and OpenGL 
