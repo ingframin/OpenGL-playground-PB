@@ -12,7 +12,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EDDAFF9B-4736-4C5C-BA03-8E24963040F0}</ProjectGuid>
-    <RootNamespace>Monica_S_Bubbles</RootNamespace>
+    <RootNamespace>OpenGL_PlayGround
+    </RootNamespace>
     <ProjectName>OpenGL_PlayGround</ProjectName>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
