@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	
 	////glew init
 	
-	Display gameDisplay("Monica's Bubbles", 800, 600);
+	Display gameDisplay("OpenGL Playground", 800, 600);
 
 	std::vector<GLfloat> vertices = {
 		0.0f,0.0f,
