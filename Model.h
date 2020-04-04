@@ -12,7 +12,7 @@ using namespace std;
 class Model
 {
 public:
-	Model(std::vector<GLfloat> vertices, GLuint vsize, GLuint* elements, GLuint esize);
+	Model(std::vector<GLfloat> vertices, std::vector<GLuint> elements);
 	~Model();
 	void loadShaders(const string vertex_shader, const string fragment_shader);
 	void draw() const;
@@ -24,7 +24,7 @@ private:
 	GLuint vao;
 
 	GLuint ebo;
-	GLuint* elements;
+	std::vector<GLuint> elements;
 	GLuint esize;
 
 	GLuint vbo;

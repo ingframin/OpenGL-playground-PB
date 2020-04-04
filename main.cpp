@@ -34,13 +34,13 @@ int main(int argc, char *argv[])
 		
 	};
 
-	GLuint elements[] = {
+	std::vector<GLuint> elements = {
 		0, 12, 11, 10,9,8,7,6,5,4,3,2,1,12
 	};
 
 	GLuint NumElements = 14;
 		
-	Model triangles(vertices,26,elements,NumElements);
+	Model triangles(vertices,elements);
 		
 	BallShader bsp {"./shaders/vertex.glsl", "./shaders/fragment.glsl"};
 	

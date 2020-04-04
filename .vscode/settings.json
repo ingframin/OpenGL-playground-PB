@@ -55,6 +55,16 @@
         "fstream": "cpp",
         "sstream": "cpp",
         "cinttypes": "cpp",
-        "concepts": "cpp"
+        "concepts": "cpp",
+        "ctime": "cpp",
+        "functional": "cpp",
+        "iomanip": "cpp",
+        "list": "cpp",
+        "locale": "cpp",
+        "xhash": "cpp",
+        "xlocbuf": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xloctime": "cpp"
     }
 }
