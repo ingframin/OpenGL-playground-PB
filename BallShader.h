@@ -6,8 +6,7 @@
 
 using namespace std;
 
-class BallShader :
-	public ShaderProgram
+class BallShader : public ShaderProgram
 {
 public:
 	BallShader(const string vertex_shader, const string fragment_shader);
@@ -15,11 +14,12 @@ public:
 	void setColor(float r, float g, float b);
 	void enable();
 	virtual ~BallShader();
+
 private:
 	GLuint vPosition;
+	GLuint tCoords;
 	GLuint transform;
 	GLuint in_color;
-
 };
 
 #endif
