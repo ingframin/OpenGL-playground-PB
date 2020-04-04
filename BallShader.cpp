@@ -7,6 +7,7 @@ BallShader::BallShader(const string vertex_shader, const string fragment_shader)
 	loadShader(fragment_shader, GL_FRAGMENT_SHADER);
 	linkProgram();
 	glUseProgram(getProgramID());
+
 	transform = glGetUniformLocation(getProgramID(), "transform");
 	in_color = glGetUniformLocation(getProgramID(), "in_color");
 
