@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DISPLAY
+#define DISPLAY
 #include <vector>
 #include <string>
 #include <SDL2/SDL.h>
@@ -24,3 +25,4 @@ private:
 
 };
 
+#endif

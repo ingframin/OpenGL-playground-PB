@@ -9,6 +9,7 @@ BallShader::BallShader(const string vertex_shader, const string fragment_shader)
 	linkProgram();
 	glUseProgram(getProgramID());
 	transform = glGetUniformLocation(getProgramID(), "transform");
+	in_color = glGetUniformLocation(getProgramID(), "in_color");
 	vPosition = 0;
 	glVertexAttribPointer(vPosition, 2, GL_FLOAT, GL_FALSE, 0, nullptr);
 	glEnableVertexAttribArray(vPosition);
@@ -18,6 +19,9 @@ void BallShader::setTransform(const math_utils::mat4 trans_matrix){
 	glUniformMatrix4fv(transform, 1, GL_FALSE, trans_matrix.getm());
 }
 
+void BallShader::setColor(float r, float g, float b){
+	glUniform3f(in_color,r,g,b);
+}
 void BallShader::enable(){
 	glUseProgram(getProgramID());
 	glEnableVertexAttribArray(vPosition);

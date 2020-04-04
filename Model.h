@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MODEL
+#define MODEL
 #include <vector>
 #include <string>
 #include <GL/glew.h>
@@ -32,3 +33,4 @@ private:
 	
 };
 
+#endif

@@ -1,5 +1,6 @@
-#pragma once
-#include <intrin.h>
+#ifndef MATH_UTILS
+#define MATH_UTILS
+#include <xmmintrin.h>
 #include <cmath>
 #include <vector>
 
@@ -40,4 +41,4 @@ namespace math_utils{
 	mat4 translate(float dx, float dy, float dz);
 	mat4 scale(float sx, float sy, float sz);
 }
-
+#endif

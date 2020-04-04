@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SHADER_PROGRAM
+#define SHADER_PROGRAM
 #include <string>
 #include <GL/glew.h>
 #include <vector>
@@ -18,3 +19,4 @@ private:
 	std::vector<GLuint> m_shaders;
 };
 
+#endif

@@ -24,7 +24,7 @@ namespace math_utils{
 		__m128 vi2 = _mm_set_ps(v2.v[0], v2.v[1], v2.v[2], v2.v[3]);
 		__m128 res = _mm_mul_ps(vi1, vi2);
 
-		return res.m128_f32[0] + res.m128_f32[1] + res.m128_f32[2] + res.m128_f32[3];
+		return res[0] + res[1] + res[2] + res[3];
 
 	}
 
@@ -76,10 +76,10 @@ namespace math_utils{
 		__m128 res3 = _mm_mul_ps(row3, col1);
 		__m128 res4 = _mm_mul_ps(row4, col1);
 
-		res[0] = res1.m128_f32[0] + res1.m128_f32[1] + res1.m128_f32[2] + res1.m128_f32[3];
-		res[1] = res2.m128_f32[0] + res2.m128_f32[1] + res2.m128_f32[2] + res2.m128_f32[3];
-		res[2] = res3.m128_f32[0] + res3.m128_f32[1] + res3.m128_f32[2] + res3.m128_f32[3];
-		res[3] = res4.m128_f32[0] + res4.m128_f32[1] + res4.m128_f32[2] + res4.m128_f32[3];
+		res[0] = res1[0] + res1[1] + res1[2] + res1[3];
+		res[1] = res2[0] + res2[1] + res2[2] + res2[3];
+		res[2] = res3[0] + res3[1] + res3[2] + res3[3];
+		res[3] = res4[0] + res4[1] + res4[2] + res4[3];
 
 		//second row
 		res1 = _mm_mul_ps(row1, col2);
@@ -87,10 +87,10 @@ namespace math_utils{
 		res3 = _mm_mul_ps(row3, col2);
 		res4 = _mm_mul_ps(row4, col2);
 
-		res[4] = res1.m128_f32[0] + res1.m128_f32[1] + res1.m128_f32[2] + res1.m128_f32[3];
-		res[5] = res2.m128_f32[0] + res2.m128_f32[1] + res2.m128_f32[2] + res2.m128_f32[3];
-		res[6] = res3.m128_f32[0] + res3.m128_f32[1] + res3.m128_f32[2] + res3.m128_f32[3];
-		res[7] = res4.m128_f32[0] + res4.m128_f32[1] + res4.m128_f32[2] + res4.m128_f32[3];
+		res[4] = res1[0] + res1[1] + res1[2] + res1[3];
+		res[5] = res2[0] + res2[1] + res2[2] + res2[3];
+		res[6] = res3[0] + res3[1] + res3[2] + res3[3];
+		res[7] = res4[0] + res4[1] + res4[2] + res4[3];
 
 		//third row
 		res1 = _mm_mul_ps(row1, col3);
@@ -98,10 +98,10 @@ namespace math_utils{
 		res3 = _mm_mul_ps(row3, col3);
 		res4 = _mm_mul_ps(row4, col3);
 
-		res[8] = res1.m128_f32[0] + res1.m128_f32[1] + res1.m128_f32[2] + res1.m128_f32[3];
-		res[9] = res2.m128_f32[0] + res2.m128_f32[1] + res2.m128_f32[2] + res2.m128_f32[3];
-		res[10] = res3.m128_f32[0] + res3.m128_f32[1] + res3.m128_f32[2] + res3.m128_f32[3];
-		res[11] = res4.m128_f32[0] + res4.m128_f32[1] + res4.m128_f32[2] + res4.m128_f32[3];
+		res[8] = res1[0] + res1[1] + res1[2] + res1[3];
+		res[9] = res2[0] + res2[1] + res2[2] + res2[3];
+		res[10] = res3[0] + res3[1] + res3[2] + res3[3];
+		res[11] = res4[0] + res4[1] + res4[2] + res4[3];
 
 		//last row
 		res1 = _mm_mul_ps(row1, col4);
@@ -109,10 +109,10 @@ namespace math_utils{
 		res3 = _mm_mul_ps(row3, col4);
 		res4 = _mm_mul_ps(row4, col4);
 
-		res[12] = res1.m128_f32[0] + res1.m128_f32[1] + res1.m128_f32[2] + res1.m128_f32[3];
-		res[13] = res2.m128_f32[0] + res2.m128_f32[1] + res2.m128_f32[2] + res2.m128_f32[3];
-		res[14] = res3.m128_f32[0] + res3.m128_f32[1] + res3.m128_f32[2] + res3.m128_f32[3];
-		res[15] = res4.m128_f32[0] + res4.m128_f32[1] + res4.m128_f32[2] + res4.m128_f32[3];
+		res[12] = res1[0] + res1[1] + res1[2] + res1[3];
+		res[13] = res2[0] + res2[1] + res2[2] + res2[3];
+		res[14] = res3[0] + res3[1] + res3[2] + res3[3];
+		res[15] = res4[0] + res4[1] + res4[2] + res4[3];
 
 		return mat4(res);
 	}
@@ -132,10 +132,10 @@ namespace math_utils{
 		__m128 res3 = _mm_mul_ps(row3, col1);
 		__m128 res4 = _mm_mul_ps(row4, col1);
 
-		res[0] = res1.m128_f32[0] + res1.m128_f32[1] + res1.m128_f32[2] + res1.m128_f32[3];
-		res[1] = res2.m128_f32[0] + res2.m128_f32[1] + res2.m128_f32[2] + res2.m128_f32[3];
-		res[2] = res3.m128_f32[0] + res3.m128_f32[1] + res3.m128_f32[2] + res3.m128_f32[3];
-		res[3] = res4.m128_f32[0] + res4.m128_f32[1] + res4.m128_f32[2] + res4.m128_f32[3];
+		res[0] = res1[0] + res1[1] + res1[2] + res1[3];
+		res[1] = res2[0] + res2[1] + res2[2] + res2[3];
+		res[2] = res3[0] + res3[1] + res3[2] + res3[3];
+		res[3] = res4[0] + res4[1] + res4[2] + res4[3];
 		vec4 vres = vec4(res[0], res[1], res[2], res[3]);
 		return vres;
 

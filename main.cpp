@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 		
 	Model triangles(vertices,26,elements,NumElements);
 		
-	BallShader& bsp = BallShader("./shaders/vertex.glsl", "./shaders/fragment.glsl");
+	BallShader bsp {"./shaders/vertex.glsl", "./shaders/fragment.glsl"};
 	
 	bsp.enable();
 	
@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
 		global_transform = translation.product(rotation.product(scaling));
 
 		bsp.setTransform(global_transform);
-		
+		bsp.setColor(1.0f,1.0f,0.0f);
 		
 
 		triangles.draw();
