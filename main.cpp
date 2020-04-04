@@ -13,8 +13,6 @@ int main(int argc, char *argv[])
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-	////glew init
-
 	Display gameDisplay("OpenGL Playground", 800, 600);
 
 	std::vector<GLfloat> vertices = {
@@ -25,8 +23,7 @@ int main(int argc, char *argv[])
 
 	};
 
-	std::vector<GLuint> elements = {
-		0, 1, 2, 3};
+	std::vector<GLuint> elements = {0, 1, 2, 2, 3, 0};
 
 	std::vector<GLfloat> tex_coordinates = {
 		0.0f, 0.0f,
@@ -61,7 +58,7 @@ int main(int argc, char *argv[])
 			if (windowEvent.type == SDL_QUIT)
 				break;
 		}
-		const Uint8 *keys = SDL_GetKeyboardState(NULL);
+		auto keys = SDL_GetKeyboardState(NULL);
 		if (keys[SDL_SCANCODE_DOWN])
 		{
 			obY -= 0.05f;
@@ -78,6 +75,10 @@ int main(int argc, char *argv[])
 		{
 			obX -= 0.05f;
 		}
+		if (keys[SDL_SCANCODE_ESCAPE])
+		{
+			break;
+		}
 
 		translation = translate(obX, obY, 0.0f);
 		gameDisplay.clear(1.0f, 0.0f, 0.0f, 1.0f);
@@ -92,10 +93,12 @@ int main(int argc, char *argv[])
 
 		gameDisplay.update();
 
-		while ((SDL_GetTicks() - lastTime) < 16)
+		auto dt = (SDL_GetTicks() - lastTime);
+		if (dt < 16)
 		{
-			continue;
+			SDL_Delay(16 - dt);
 		}
+
 		lastTime = SDL_GetTicks();
 	}
 

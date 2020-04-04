@@ -46,6 +46,7 @@ void Model::loadTexture(const string &filename)
 		Mode = GL_RGBA;
 	}
 	glTexImage2D(GL_TEXTURE_2D, 0, Mode, tmp->w, tmp->h, 0, Mode, GL_UNSIGNED_BYTE, tmp->pixels);
+	SDL_FreeSurface(tmp);
 }
 
 Model::~Model()
