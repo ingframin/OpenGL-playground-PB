@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 		translation = translate(obX, obY, 0.0f);
 		gameDisplay.clear(1.0f, 0.0f, 0.0f, 1.0f);
 
-		rotation = rotate(0.0f, 0.0f, 1.0f, 0.001f * lastTime);
+		rotation = rotate(0.0f, 0.0f, 1.0f, 0.002f * lastTime);
 		global_transform = translation.product(rotation.product(scaling));
 
 		bsp.setTransform(global_transform);
