@@ -18,30 +18,28 @@ int main(int argc, char *argv[])
 	Display gameDisplay("OpenGL Playground", 800, 600);
 
 	std::vector<GLfloat> vertices = {
-		0.0f,0.0f,
-		1.000f,	0.000f,
-		0.866f,	0.500f,
-		0.500f,	0.866f,
-		0.000f,	1.000f,
-		-0.500f,0.866f,
-		-0.866f,0.500f,
-		-1.000f,0.000f,
-		-0.866f,-0.500f,
-		-0.500f,-0.866f,
-		0.000f,-1.000f,
-		0.500f,-0.866f,
-		0.866f, -0.500f
+		-0.5f,-0.5f,
+		-0.5f,0.5f,
+		0.5f, 0.5f,
+		0.5f, -0.5f
 		
 	};
 
 	std::vector<GLuint> elements = {
-		0, 12, 11, 10,9,8,7,6,5,4,3,2,1,12
+		0,1,2,3
+	};
+
+	std::vector<GLfloat> tex_coordinates={
+		0.0f,0.0f,
+		0.0f,1.0f,
+		1.0f,1.0f,
+		1.0f,0.0f
 	};
 
 	GLuint NumElements = 14;
 		
-	Model triangles(vertices,elements);
-		
+	Model triangles(vertices,elements,tex_coordinates);
+	triangles.loadTexture("fish.png");
 	BallShader bsp {"./shaders/vertex.glsl", "./shaders/fragment.glsl"};
 	
 	bsp.enable();
