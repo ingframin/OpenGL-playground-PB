@@ -9,7 +9,6 @@ namespace math_utils{
 	class vec4{
 	public:
 		vec4(float x, float y, float z, float w);
-		float operator[](char i) const;
 		float get(unsigned int i) const;
 		const float* getV()const { return v; }
 		void set(unsigned int i, float value);
