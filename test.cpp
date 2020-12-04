@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <GL/glew.h>
+#include "Display.h"
 
 // Shader sources
 const GLchar *vertexSource = R"glsl(
@@ -35,13 +36,8 @@ const GLchar *fragmentSource = R"glsl(
 int main(int argc, char **argv)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetSwapInterval(1);
-    auto window = SDL_CreateWindow("test", 100, 100, 800, 600, SDL_WINDOW_OPENGL);
-    auto context = SDL_GL_CreateContext(window);
+    Display disp {"OpenGL Playground",1280,720};
+    
     glViewport(0, 0, 800, 600);
     glewExperimental = GL_TRUE;
     glewInit();
@@ -140,14 +136,12 @@ int main(int argc, char **argv)
         }
 
         // Clear the screen to black
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
+        disp.clear(0.0f,0.0f,0.0f,0.0f);
         // Draw a rectangle from the 2 triangles using 6 indices
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
         // Swap buffers
-        SDL_GL_SwapWindow(window);
+        disp.update();
     }
 
     glDeleteTextures(1, &tex);
@@ -161,8 +155,7 @@ int main(int argc, char **argv)
 
     glDeleteVertexArrays(1, &vao);
 
-    SDL_GL_DeleteContext(context);
-    SDL_DestroyWindow(window);
+    
     SDL_Quit();
 
     return 0;
