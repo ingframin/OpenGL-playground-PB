@@ -4,9 +4,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <GL/glew.h>
+#include "math_utils.h"
 #include "Display.h"
 #include "ShaderProgram.h"
-#include "math_utils.h"
+
 
 int main(int argc, char **argv)
 {
@@ -64,7 +65,7 @@ int main(int argc, char **argv)
     // Specify the layout of the vertex data
     GLint posAttrib = glGetAttribLocation(sp.getProgramID(), "position");
     glEnableVertexAttribArray(posAttrib);
-    glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), 0);
+    glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void *)0);
 
     GLint colAttrib = glGetAttribLocation(sp.getProgramID(), "color");
     glEnableVertexAttribArray(colAttrib);

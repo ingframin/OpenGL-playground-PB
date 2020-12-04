@@ -14,6 +14,7 @@ Display::Display(const std::string &title, unsigned int width, unsigned int heig
 	this->height = height;
 	glewExperimental = GL_TRUE;
 	glewInit();
+	glEnable(GL_DEPTH_TEST);
 }
 
 Display::~Display()
@@ -37,5 +38,5 @@ void Display::update() const
 
 float Display::getRatio() const
 {
-	return (float)height / (float)width;
+	return (float)width / (float)height;
 }
