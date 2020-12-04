@@ -102,7 +102,6 @@ int main(int argc, char *argv[])
 		lastTime = SDL_GetTicks();
 	}
 
-	gameDisplay.dispose();
 
 	SDL_Quit();
 	return 0;

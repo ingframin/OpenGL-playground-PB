@@ -13,7 +13,6 @@ public:
 	float getRatio() const;
 	void update() const;
 
-	void dispose() const;
 	void clear(float r, float g, float b, float a);
 	virtual ~Display();
 

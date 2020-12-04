@@ -18,7 +18,8 @@ Display::Display(const std::string &title, unsigned int width, unsigned int heig
 
 Display::~Display()
 {
-	dispose();
+	SDL_DestroyWindow(m_window);
+	SDL_GL_DeleteContext(m_context);
 }
 
 void Display::clear(float r, float g, float b, float a)
@@ -32,12 +33,6 @@ void Display::update() const
 {
 	//glFlush();
 	SDL_GL_SwapWindow(m_window);
-}
-
-void Display::dispose() const
-{
-	SDL_DestroyWindow(m_window);
-	SDL_GL_DeleteContext(m_context);
 }
 
 float Display::getRatio() const
