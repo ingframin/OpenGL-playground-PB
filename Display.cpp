@@ -37,5 +37,5 @@ void Display::update() const
 
 float Display::getRatio() const
 {
-	return (float)width / (float)height;
+	return (float)height / (float)width;
 }

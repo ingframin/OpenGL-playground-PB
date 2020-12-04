@@ -13,7 +13,7 @@ int main(int argc, char **argv)
     SDL_Init(SDL_INIT_EVERYTHING);
     Display disp {"OpenGL Playground",1280,720};
     
-    glViewport(0, 0, 800, 600);
+    
     glewExperimental = GL_TRUE;
     glewInit();
 
@@ -104,6 +104,9 @@ int main(int argc, char **argv)
     bool running = true;
     SDL_Event windowEvent;
     uint64_t lastTime = 0;
+    float obX = 0.0f;
+	float obY = 0.0f;
+    float sc = 1.0f;
     while (running)
     {
         if (SDL_PollEvent(&windowEvent))
@@ -111,12 +114,43 @@ int main(int argc, char **argv)
             if (windowEvent.type == SDL_QUIT)
                 break;
         }
-
+        	auto keys = SDL_GetKeyboardState(NULL);
+		if (keys[SDL_SCANCODE_DOWN])
+		{
+			obY -= 0.05f;
+		}
+		if (keys[SDL_SCANCODE_UP])
+		{
+			obY += 0.05f;
+		}
+		if (keys[SDL_SCANCODE_RIGHT])
+		{
+			obX += 0.05f;
+		}
+		if (keys[SDL_SCANCODE_LEFT])
+		{
+			obX -= 0.05f;
+		}
+		if (keys[SDL_SCANCODE_ESCAPE])
+		{
+			break;
+		}
+        if(keys[SDL_SCANCODE_E]&& sc<10){
+            sc += 0.2f;
+        }
+        if(keys[SDL_SCANCODE_D] && sc>0){
+            sc -= 0.2f;
+        }
         // Clear the screen to black
         disp.clear(0.0f,0.0f,0.0f,0.0f);
+
+        //Set transformation matrix
+        translation = math_utils::translate(obX, obY, 0.0f);
         rotation = math_utils::rotate(0.0f, 0.0f, 1.0f, 0.002f * lastTime);
+        scaling = math_utils::scale(sc*disp.getRatio(), sc, 1.0f);
 		global_transform = translation.product(rotation.product(scaling));
         glUniformMatrix4fv(uniTransform, 1, GL_FALSE, global_transform.getm());
+        
         // Draw a rectangle from the 2 triangles using 6 indices
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 

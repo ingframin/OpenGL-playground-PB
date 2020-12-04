@@ -175,9 +175,9 @@ namespace math_utils{
 
 	mat4 scale(float sx, float sy, float sz){
 		float scale_matrix[] = {
-			1.0f / sx, 0.0f, 0.0f, 0.0f,
-			0.0f, 1.0f / sy, 0.0f, 0.0f,
-			0.0f, 0.0f, 1.0f / sz, 0.0f,
+			sx, 0.0f, 0.0f, 0.0f,
+			0.0f, sy, 0.0f, 0.0f,
+			0.0f, 0.0f, sz, 0.0f,
 			0.0f, 0.0f, 0.0f, 1.0f
 		};
 		return mat4(scale_matrix);
