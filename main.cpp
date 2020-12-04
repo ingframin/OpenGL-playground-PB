@@ -28,10 +28,10 @@ int main(int argc, char **argv)
 
     GLfloat vertices[] = {
         //  Position      Color             Texcoords
-        -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // Top-left
-        0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  // Top-right
-        0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // Bottom-right
-        -0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f // Bottom-left
+        -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,     0.0f, 0.0f, // Top-left
+         0.5f,  0.5f,  0.0f, 1.0f, 0.0f,     1.0f, 0.0f,  // Top-right
+         0.5f, -0.5f,  0.0f, 0.0f, 1.0f,     1.0f, 1.0f, // Bottom-right
+        -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,     0.0f, 1.0f // Bottom-left
     };
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -107,6 +107,7 @@ int main(int argc, char **argv)
     float obX = 0.0f;
 	float obY = 0.0f;
     float sc = 1.0f;
+
     while (running)
     {
         if (SDL_PollEvent(&windowEvent))
