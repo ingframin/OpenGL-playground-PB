@@ -135,11 +135,11 @@ int main(int argc, char **argv)
 		{
 			break;
 		}
-        if(keys[SDL_SCANCODE_E]&& sc<10){
-            sc += 0.2f;
+        if(keys[SDL_SCANCODE_E]&& sc<5.0f){
+            sc += 0.1f;
         }
-        if(keys[SDL_SCANCODE_D] && sc>0){
-            sc -= 0.2f;
+        if(keys[SDL_SCANCODE_D] && sc>0.4f){
+            sc -= 0.1f;
         }
         // Clear the screen to black
         disp.clear(0.0f,0.0f,0.0f,0.0f);
