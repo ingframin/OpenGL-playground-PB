@@ -39,5 +39,6 @@ namespace math_utils{
 	mat4 rotate(float vx, float vy, float vz, float ang);
 	mat4 translate(float dx, float dy, float dz);
 	mat4 scale(float sx, float sy, float sz);
+	mat4 perspective(float fov, float far, float near);
 }
 #endif

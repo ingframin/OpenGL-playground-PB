@@ -1,4 +1,9 @@
 #include "math_utils.h"
+#define _USE_MATH_DEFINES
+#include <cmath>
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
 
 namespace math_utils{
 
@@ -56,6 +61,10 @@ namespace math_utils{
 		m[13] = 0.0f;
 		m[14] = 1.0f;
 		m[15] = 0.0f;
+	}
+
+	const float mat4::get(unsigned int x, unsigned int y) const{
+		return m[x+4*y];
 	}
 
 	mat4 mat4::product(const mat4& m2) const{
@@ -182,6 +191,18 @@ namespace math_utils{
 		};
 		return mat4(scale_matrix);
 
+	}
+
+	mat4 perspective(float fov, float far, float near){
+		auto S = 1.0f/(tan(fov/2)*(M_PI/180 ));
+		auto fn = -far/(far-near);
+		float proj_matrix[] = {
+			S, 0.0f, 0.0f, 0.0f,
+			0.0f, S, 0.0f, 0.0f,
+			0.0f, 0.0f, fn, -1.0f,
+			0.0f, 0.0f, fn*near, 0.0f
+		};
+		return mat4(proj_matrix);
 	}
 
 }

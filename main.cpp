@@ -4,10 +4,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <GL/glew.h>
-#include "math_utils.h"
 #include "Display.h"
 #include "ShaderProgram.h"
-
+#include "math_utils.h"
 
 int main(int argc, char **argv)
 {
@@ -57,9 +56,9 @@ int main(int argc, char **argv)
     sp.loadShader("./shaders/fragment.glsl",GL_FRAGMENT_SHADER);
     
     // Link the vertex and fragment shader into a shader program
-    sp.linkProgram();
+    
     glBindFragDataLocation(sp.getProgramID(), 0, "outColor");
-    glLinkProgram(sp.getProgramID());
+    sp.linkProgram();
     glUseProgram(sp.getProgramID());
 
     // Specify the layout of the vertex data
