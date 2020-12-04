@@ -32,8 +32,6 @@ void Display::clear(float r, float g, float b, float a)
 
 void Display::update() const
 {
-	
-	
 	glFlush();
 	SDL_GL_SwapWindow(m_window);
 }
