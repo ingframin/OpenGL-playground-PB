@@ -57,7 +57,7 @@ int main(int argc, char **argv)
     
     // Link the vertex and fragment shader into a shader program
     
-    glBindFragDataLocation(sp.getProgramID(), 0, "outColor");
+    //glBindFragDataLocation(sp.getProgramID(), 0, "outColor");
     sp.linkProgram();
     glUseProgram(sp.getProgramID());
 
@@ -101,6 +101,7 @@ int main(int argc, char **argv)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glGenerateMipmap(GL_TEXTURE_2D);
+    
     bool running = true;
     SDL_Event windowEvent;
     uint64_t lastTime = 0;

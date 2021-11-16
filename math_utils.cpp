@@ -2,6 +2,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <xmmintrin.h>
+#include <pmmintrin.h>
 #ifndef M_PI
     #define M_PI 3.14159265358979323846
 #endif
@@ -130,10 +131,10 @@ namespace math_utils{
 	vec4 mat4::product(const vec4& v) const{
 		float res[4];
 
-		__m128 row1 = _mm_set_ps(m[0], m[1], m[2], m[3]);
-		__m128 row2 = _mm_set_ps(m[4], m[5], m[6], m[7]);
-		__m128 row3 = _mm_set_ps(m[8], m[9], m[10], m[11]);
-		__m128 row4 = _mm_set_ps(m[12], m[13], m[14], m[15]);
+		__m128 row1 = _mm_set_ps(m[0], m[4], m[8], m[12]);
+		__m128 row2 = _mm_set_ps(m[1], m[5], m[9], m[13]);
+		__m128 row3 = _mm_set_ps(m[2], m[6], m[10], m[14]);
+		__m128 row4 = _mm_set_ps(m[3], m[7], m[11], m[15]);
 		__m128 col1 = _mm_set_ps(v.get(0), v.get(1), v.get(2), v.get(3));
 
 		//First row
@@ -142,11 +143,11 @@ namespace math_utils{
 		__m128 res3 = _mm_mul_ps(row3, col1);
 		__m128 res4 = _mm_mul_ps(row4, col1);
 
-		res[0] = res1[0] + res1[1] + res1[2] + res1[3];
-		res[1] = res2[0] + res2[1] + res2[2] + res2[3];
-		res[2] = res3[0] + res3[1] + res3[2] + res3[3];
-		res[3] = res4[0] + res4[1] + res4[2] + res4[3];
-		vec4 vres = vec4(res[0], res[1], res[2], res[3]);
+		__m128 sum_12 = _mm_hadd_ps(res1, res2);
+		__m128 sum_34 = _mm_hadd_ps(res3, res4);
+
+		__m128 result = _mm_hadd_ps(sum_12, sum_34);
+		vec4 vres = vec4(result[0], result[1], result[2], result[3]);
 		return vres;
 
 	}

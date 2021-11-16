@@ -18,6 +18,7 @@
         "-mmmx",
         "-msse",
         "-msse2",
+        "-msse3",
         "-o./build/game.exe",
         "-I./include",
         "-L./lib",
