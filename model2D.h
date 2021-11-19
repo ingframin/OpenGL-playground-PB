@@ -5,6 +5,14 @@
 #include "math_utils.h"
 #include "ShaderProgram.h"
 
+/*This is a temporary struct to free up space in the main.
+It must be fixed:
+- Proper model handling (vertices, normals, colors and texture coordinates in separate VBOs?)
+- Proper texture handling
+- Remove hardcoding of the shaders
+- Reduce decoupling
+- Separate different transforms: rotation, scaling and translation
+*/
 struct Model2D{
     GLuint vao;
     GLuint vbo;
