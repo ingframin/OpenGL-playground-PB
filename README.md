@@ -14,4 +14,4 @@ Project to experiment while I study c++ and OpenGL
 10. Make a game out of it (?)
 
 ## To compile with GCC
-g++ -DGLEW_STATIC glew.c main.cpp math_utils.cpp ShaderProgram.cpp Display.cpp model2D.cpp -O3 -o./build/game.exe -I./include -L./lib -lOpengl32 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer 
+    g++ -DGLEW_STATIC glew.c main.cpp math_utils.cpp ShaderProgram.cpp Display.cpp model2D.cpp -O3 -o./build/game.exe -I./include -L./lib -lOpengl32 -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer 
