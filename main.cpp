@@ -75,10 +75,12 @@ int main(int argc, char **argv)
     glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void *)(5 * sizeof(GLfloat)));
 
     auto uniTransform = glGetUniformLocation(sp.getProgramID(), "transform");
-    math_utils::mat4 rotation = math_utils::rotate(1.0f, 0.0f, 0.0f, 0.0f);
+    
+   
+    math_utils::mat4 rotation = math_utils::rotateZ(0.0f);
 	math_utils::mat4 scaling = math_utils::scale(disp.getRatio(), 1.0f, 1.0f);
 	math_utils::mat4 translation = math_utils::translate(0.0f, 0.0f, 0.0f);
-	math_utils::mat4 global_transform = translation.product(scaling.product(rotation));
+	math_utils::mat4 global_transform = translation.product(rotation.product(scaling));
 
     // Load texture
     GLuint tex;
@@ -108,7 +110,7 @@ int main(int argc, char **argv)
     float obX = 0.0f;
 	float obY = 0.0f;
     float sc = 1.0f;
-
+    float ang = 0.0f;
     while (running)
     {
         if (SDL_PollEvent(&windowEvent))
@@ -143,15 +145,24 @@ int main(int argc, char **argv)
         if(keys[SDL_SCANCODE_D] && sc>0.4f){
             sc -= 0.1f;
         }
+        if(keys[SDL_SCANCODE_R]){
+            ang += 0.01f;
+        }
+        if(keys[SDL_SCANCODE_F]){
+            ang -= 0.01f;
+        }
+        
         // Clear the screen to black
         disp.clear(0.0f,0.0f,0.0f,0.0f);
 
         //Set transformation matrix
         translation = math_utils::translate(obX, obY, 0.0f);
-        rotation = math_utils::rotate(0.0f, 0.0f, 1.0f, 0.002f * lastTime);
+        
+        rotation = math_utils::rotateZ(ang);
+        
         scaling = math_utils::scale(sc*disp.getRatio(), sc, 1.0f);
 		global_transform = translation.product(rotation.product(scaling));
-        glUniformMatrix4fv(uniTransform, 1, GL_FALSE, global_transform.getm());
+        glUniformMatrix4fv(uniTransform, 1, GL_FALSE, global_transform.getM());
         
         // Draw a rectangle from the 2 triangles using 6 indices
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

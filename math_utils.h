@@ -1,6 +1,5 @@
 #ifndef MATH_UTILS
 #define MATH_UTILS
-#include <xmmintrin.h>
 #include <cmath>
 #include <vector>
 
@@ -9,12 +8,15 @@ namespace math_utils{
 	class vec4{
 	public:
 		vec4(float x, float y, float z, float w);
-		float get(unsigned int i) const;
+		vec4();
+		float& operator[](int index);
+		float& operator[](char index);
+		
 		const float* getV()const { return v; }
-		void set(unsigned int i, float value);
+		
 		float dot_product(const vec4& v) const;
+		float mod();
 
-		~vec4(){};
 	private:
 		float v[4];
 	};
@@ -24,19 +26,23 @@ namespace math_utils{
 
 		mat4(const float* mc);
 		mat4();
-		mat4 product(const mat4& m) const;
-		vec4 product(const vec4& v) const;
-		const float get(unsigned int x, unsigned int y) const;
-		void set(unsigned int x, unsigned int y, float v);
-		const float* getm() const { return m; }
+		mat4 product(mat4 m);
+		vec4 product(vec4 v);
+		void transpose();
+		float* getM();
 
 
 	private:
-		float m[16];
+		vec4 row1;
+		vec4 row2;
+		vec4 row3;
+		vec4 row4;
 
 	};
 
-	mat4 rotate(float vx, float vy, float vz, float ang);
+	mat4 rotateX(float ang);
+	mat4 rotateY(float ang);
+	mat4 rotateZ(float ang);
 	mat4 translate(float dx, float dy, float dz);
 	mat4 scale(float sx, float sy, float sz);
 	mat4 perspective(float fov, float far, float near);

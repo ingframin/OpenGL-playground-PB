@@ -65,6 +65,9 @@
         "xlocbuf": "cpp",
         "xlocmes": "cpp",
         "xlocmon": "cpp",
-        "xloctime": "cpp"
+        "xloctime": "cpp",
+        "bit": "cpp",
+        "compare": "cpp",
+        "iterator": "cpp"
     }
 }
