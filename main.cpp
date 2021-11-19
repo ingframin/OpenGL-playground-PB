@@ -7,6 +7,7 @@
 #include "Display.h"
 #include "ShaderProgram.h"
 #include "math_utils.h"
+#include "model2D.h"
 
 int main(int argc, char **argv)
 {
@@ -17,14 +18,7 @@ int main(int argc, char **argv)
     glewExperimental = GL_TRUE;
     glewInit();
 
-    // Create Vertex Array Object
-    GLuint vao;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
 
-    // Create a Vertex Buffer Object and copy the vertex data to it
-    GLuint vbo;
-    glGenBuffers(1, &vbo);
 
     GLfloat vertices[] = {
         //  Position      Color             Texcoords
@@ -34,58 +28,11 @@ int main(int argc, char **argv)
         -0.5f, -0.5f,  1.0f, 1.0f, 1.0f,     0.0f, 1.0f // Bottom-left
     };
 
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    // Create an element array
-    GLuint ebo;
-    glGenBuffers(1, &ebo);
-
-    GLuint elements[] = {
-        0, 1, 2,
-        2, 3, 0};
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
-    ShaderProgram sp;
-    
-    // Create and compile the vertex shader
-    sp.loadShader("./shaders/vertex.glsl",GL_VERTEX_SHADER);
-    
-    // Create and compile the fragment shader
-    sp.loadShader("./shaders/fragment.glsl",GL_FRAGMENT_SHADER);
-    
-    // Link the vertex and fragment shader into a shader program
-    
-    //glBindFragDataLocation(sp.getProgramID(), 0, "outColor");
-    sp.linkProgram();
-    glUseProgram(sp.getProgramID());
-
-    // Specify the layout of the vertex data
-    GLint posAttrib = glGetAttribLocation(sp.getProgramID(), "position");
-    glEnableVertexAttribArray(posAttrib);
-    glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void *)0);
-
-    GLint colAttrib = glGetAttribLocation(sp.getProgramID(), "color");
-    glEnableVertexAttribArray(colAttrib);
-    glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void *)(2 * sizeof(GLfloat)));
-
-    GLint texAttrib = glGetAttribLocation(sp.getProgramID(), "texcoord");
-    glEnableVertexAttribArray(texAttrib);
-    glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void *)(5 * sizeof(GLfloat)));
-
-    auto uniTransform = glGetUniformLocation(sp.getProgramID(), "transform");
-    
-   
     math_utils::mat4 rotation = math_utils::rotateZ(0.0f);
 	math_utils::mat4 scaling = math_utils::scale(disp.getRatio(), 1.0f, 1.0f);
 	math_utils::mat4 translation = math_utils::translate(0.0f, 0.0f, 0.0f);
 	math_utils::mat4 global_transform = translation.product(rotation.product(scaling));
 
-    // Load texture
-    GLuint tex;
-    glGenTextures(1, &tex);
-    glBindTexture(GL_TEXTURE_2D, tex);
 
     int width, height;
     SDL_Surface *tmp = IMG_Load("fish.png");
@@ -95,15 +42,10 @@ int main(int argc, char **argv)
     {
         Mode = GL_RGBA;
     }
-    glTexImage2D(GL_TEXTURE_2D, 0, Mode, tmp->w, tmp->h, 0, Mode, GL_UNSIGNED_BYTE, tmp->pixels);
-    SDL_FreeSurface(tmp);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glGenerateMipmap(GL_TEXTURE_2D);
     
+    auto m2d = Model2D(vertices,tmp);
+
+    SDL_FreeSurface(tmp);
     bool running = true;
     SDL_Event windowEvent;
     uint64_t lastTime = 0;
@@ -162,7 +104,8 @@ int main(int argc, char **argv)
         
         scaling = math_utils::scale(sc*disp.getRatio(), sc, 1.0f);
 		global_transform = translation.product(rotation.product(scaling));
-        glUniformMatrix4fv(uniTransform, 1, GL_FALSE, global_transform.getM());
+        m2d.setTransform(global_transform);
+        
         
         // Draw a rectangle from the 2 triangles using 6 indices
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -179,13 +122,6 @@ int main(int argc, char **argv)
 		lastTime = SDL_GetTicks();
     }
 
-    glDeleteTextures(1, &tex);
-
-  
-    glDeleteBuffers(1, &ebo);
-    glDeleteBuffers(1, &vbo);
-
-    glDeleteVertexArrays(1, &vao);
 
     
     SDL_Quit();

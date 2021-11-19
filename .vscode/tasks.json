@@ -12,7 +12,7 @@
         "math_utils.cpp",
         "ShaderProgram.cpp",
         "Display.cpp",
-        "-mfpmath=sse", 
+        "model2D.cpp",
         "-O3",
         "-o./build/game.exe",
         "-I./include",
