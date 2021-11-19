@@ -15,11 +15,6 @@ int main(int argc, char **argv)
     Display disp {"OpenGL Playground",1280,720};
     
     
-    glewExperimental = GL_TRUE;
-    glewInit();
-
-
-
     GLfloat vertices[] = {
         //  Position      Color             Texcoords
         -0.5f,  0.5f,  1.0f, 0.0f, 0.0f,     0.0f, 0.0f, // Top-left
@@ -114,9 +109,9 @@ int main(int argc, char **argv)
         disp.update();
         //Control frame rate
         auto dt = (SDL_GetTicks() - lastTime);
-		if (dt < 16)
+		if (dt < 5)
 		{
-			SDL_Delay(16 - dt);
+			SDL_Delay(5 - dt);
 		}
 
 		lastTime = SDL_GetTicks();

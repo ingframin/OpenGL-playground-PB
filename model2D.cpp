@@ -5,7 +5,11 @@
 #include "math_utils.h"
 #include "ShaderProgram.h"
 
+static uint64_t entity_ids=0;
+
 Model2D::Model2D(GLfloat vertices[], SDL_Surface* tmp){
+    ID = entity_ids;
+    entity_ids++;
     /*This constructor does too many things.
     It will be split into multiple methods*/
     glGenVertexArrays(1, &vao);

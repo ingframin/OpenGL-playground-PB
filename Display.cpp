@@ -9,6 +9,8 @@ Display::Display(const std::string &title, unsigned int width, unsigned int heig
 	SDL_GL_SetSwapInterval(1);
 	m_window = SDL_CreateWindow(title.c_str(), 100, 100, width, height, SDL_WINDOW_OPENGL);
 	m_context = SDL_GL_CreateContext(m_window);
+
+	//This should be dynamic/moved to a separate method to draw different parts of the interface/hud
 	glViewport(0, 0, width, height);
 	this->width = width;
 	this->height = height;

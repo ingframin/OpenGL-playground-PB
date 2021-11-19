@@ -12,8 +12,13 @@ It must be fixed:
 - Remove hardcoding of the shaders
 - Reduce decoupling
 - Separate different transforms: rotation, scaling and translation
+- Add animation/frames/spritesheet
 */
+
 struct Model2D{
+    //Entity ID
+    uint64_t ID;
+    /********/
     GLuint vao;
     GLuint vbo;
     GLuint ebo;
@@ -23,6 +28,9 @@ struct Model2D{
 
     Model2D(GLfloat vertices[], SDL_Surface* tmp);
     void setTransform(math_utils::mat4 globalTransform);
-
+    void move(float dx, float dy);
+    void rotate(float angle);
+    void scale(float sc);
+    
 
 };
