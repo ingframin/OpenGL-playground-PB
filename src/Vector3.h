@@ -7,6 +7,8 @@ namespace math_utils{
         public:
         vec3();
         vec3(float x, float y, float z);
+        vec3(const vec3& v){x=v.x; y=v.y; z=v.z;};
+
         vec3 add(const vec3& v);
         vec3 sub(const vec3& v);
         
