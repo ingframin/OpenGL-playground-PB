@@ -66,6 +66,10 @@ namespace math_utils{
         return vec2(x*kx,y*ky);
     }
 
-
+    std::shared_ptr<float> vec2::getV(){
+        auto v = {x,y};
+        
+        return std::make_shared<float>(v);
+    }
 }
 

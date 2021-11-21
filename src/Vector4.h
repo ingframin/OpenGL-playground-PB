@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 
 namespace math_utils{
 class vec4{

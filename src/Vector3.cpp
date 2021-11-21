@@ -112,5 +112,11 @@ namespace math_utils{
     vec3 vec3::scale(float kx, float ky, float kz){
         return vec3(x*kx,y*ky,z*kz);
     }
+    
+    std::shared_ptr<float> vec3::getV(){
+        auto v = {x,y,z};
+        
+        return std::make_shared<float>(v);
+    }
 
 }
