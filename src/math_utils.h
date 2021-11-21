@@ -1,25 +1,14 @@
 #ifndef MATH_UTILS
 #define MATH_UTILS
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
 #include <cmath>
 #include <vector>
 
 
 namespace math_utils{
-	class vec4{
-	public:
-		vec4(float x, float y, float z, float w);
-		vec4();
-		float& operator[](int index);
-		float& operator[](char index);
-		
-		const float* getV()const { return v; }
-		
-		float dot_product(const vec4& v) const;
-		float mod();
-
-	private:
-		float v[4];
-	};
+	
 
 	class mat4{
 	public:
@@ -29,7 +18,7 @@ namespace math_utils{
 		mat4 product(mat4 m);
 		vec4 product(vec4 v);
 		void transpose();
-		float* getM();
+		std::vector<float> getM();
 
 
 	private:

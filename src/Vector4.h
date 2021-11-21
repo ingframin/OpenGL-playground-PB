@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-
+#include <vector>
 namespace math_utils{
 class vec4{
 	public:
@@ -28,7 +28,7 @@ class vec4{
         float Z(){return z;}
         float W(){return w;}
 		
-		std::shared_ptr<float> getV();
+		std::vector<float> getV();
 
 	private:
 		float x,y,z,w;

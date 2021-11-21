@@ -7,53 +7,7 @@
 #include <iostream>
 
 namespace math_utils{
-	vec4::vec4(){
-		v[0]=0;
-		v[1]=0;
-		v[2]=0;
-		v[3]=1;
-	}
-	vec4::vec4(float x, float y, float z, float w){
-		v[0] = x;
-		v[1] = y;
-		v[2] = z;
-		v[3] = w;
-
-	}
-
-	float vec4::mod(){
-		return sqrtf(v[0]*v[0]+v[1]*v[1]+v[2]*v[2]+v[3]*v[3]);
-	}
-
-	float& vec4::operator[](int index){
-		if(index > 3){
-			std::cout<<"Index out of bounds!"<<std::endl;
-			exit(0);
-		}
-		return v[index];
-
-	}
 	
-	float& vec4::operator[](char index){
-		float* ret;
-		switch(index){
-			case 'x': ret= &v[0];
-			case 'y': ret= &v[1];
-			case 'z': ret= &v[2];
-			case 'w': ret= &v[3];
-			default:
-				std::cout<<"Index out of bounds!"<<std::endl;
-				exit(0);
-		}
-		return *ret;
-	}
-
-	
-	float vec4::dot_product(const vec4& v2) const{
-		
-		return v[0]*v2.v[0] + v[1]*v2.v[1] + v[2]*v2.v[2] + v[3]*v2.v[3];
-
-	}
 
 /**************************************************/
 
@@ -72,18 +26,18 @@ namespace math_utils{
 	}
 	
 	void mat4::transpose(){
-		row1 = {row1[0],row2[0],row3[0],row4[0]};
-		row2 = {row1[1],row2[1],row3[1],row4[1]};
-		row3 = {row1[2],row2[2],row3[2],row4[2]};
-		row4 = {row1[3],row2[3],row3[3],row4[3]};
+		row1 = {row1.X(),row2.X(),row3.X(),row4.X()};
+		row2 = {row1.Y(),row2.Y(),row3.Y(),row4.Y()};
+		row3 = {row1.Z(),row2.Z(),row3.Z(),row4.Z()};
+		row4 = {row1.W(),row2.W(),row3.W(),row4.W()};
 	}
 
 	mat4 mat4::product(mat4 m2){
 		mat4 res;
-		vec4 col1 = {m2.row1[0],m2.row2[0],m2.row3[0],m2.row4[0]};
-		vec4 col2 = {m2.row1[1],m2.row2[1],m2.row3[1],m2.row4[1]};
-		vec4 col3 = {m2.row1[2],m2.row2[2],m2.row3[2],m2.row4[2]};
-		vec4 col4 = {m2.row1[3],m2.row2[3],m2.row3[3],m2.row4[3]};
+		vec4 col1 = {m2.row1.X(),m2.row2.X(),m2.row3.X(),m2.row4.X()};
+		vec4 col2 = {m2.row1.Y(),m2.row2.Y(),m2.row3.Y(),m2.row4.Y()};
+		vec4 col3 = {m2.row1.Z(),m2.row2.Z(),m2.row3.Z(),m2.row4.Z()};
+		vec4 col4 = {m2.row1.W(),m2.row2.W(),m2.row3.W(),m2.row4.W()};
 		res.row1={
 				row1.dot_product(col1),
 				row2.dot_product(col1),
@@ -217,14 +171,27 @@ namespace math_utils{
 		return mat4(proj_matrix);
 	}
 
-	float* mat4::getM(){
-		auto M = new float[16];
-		for(int i=0;i<4;i++){
-			M[i] = row1[i];
-			M[i+4] = row2[i];
-			M[i+8] = row3[i];
-			M[i+12] = row4[i];
-		}
+	std::vector<float> mat4::getM(){
+		auto M = std::vector<float>();
+		M.push_back(row1.X());
+		M.push_back(row1.Y());
+		M.push_back(row1.Z());
+		M.push_back(row1.W());
+		
+		M.push_back(row2.X());
+		M.push_back(row2.Y());
+		M.push_back(row2.Z());
+		M.push_back(row2.W());
+
+		M.push_back(row3.X());
+		M.push_back(row3.Y());
+		M.push_back(row3.Z());
+		M.push_back(row3.W());
+
+		M.push_back(row4.X());
+		M.push_back(row4.Y());
+		M.push_back(row4.Z());
+		M.push_back(row4.W());
 		return M;
 	}
 

@@ -1,5 +1,6 @@
 #include "Vector4.h"
 #include <memory>
+#include <vector>
 #define _USE_MATH_DEFINES
 #include <cmath>
 #ifndef M_PI
@@ -138,10 +139,14 @@ namespace math_utils{
                 
         
 		
-	std::shared_ptr<float> vec4::getV(){
-        auto v = {x,y,z,w};
+	std::vector<float> vec4::getV(){
+        auto v = std::vector<float>();
+        v.push_back(x);
+        v.push_back(y);
+        v.push_back(z);
+        v.push_back(w);
         
-        return std::make_shared<float>(v);
+        return v;
     }
 	
 

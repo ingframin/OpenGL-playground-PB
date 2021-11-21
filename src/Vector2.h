@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <vector>
 
 namespace math_utils{
 
@@ -22,8 +23,8 @@ namespace math_utils{
                 
         float X(){return x;}
         float Y(){return y;}
-        
-        std::shared_ptr<float> vec2::getV();
+
+        std::vector<float> getV();
 
         private:
         float x,y;

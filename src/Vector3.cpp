@@ -1,6 +1,7 @@
 #include "Vector3.h"
 #define _USE_MATH_DEFINES
 #include <cmath>
+#include <vector>
 #ifndef M_PI
     #define M_PI 3.14159265358979323846
 #endif
@@ -112,11 +113,11 @@ namespace math_utils{
     vec3 vec3::scale(float kx, float ky, float kz){
         return vec3(x*kx,y*ky,z*kz);
     }
-    
-    std::shared_ptr<float> vec3::getV(){
-        auto v = {x,y,z};
+
+    std::vector<float> vec3::getV(){
+        auto v = std::vector<float>{x,y,z};
         
-        return std::make_shared<float>(v);
+        return v;
     }
 
 }

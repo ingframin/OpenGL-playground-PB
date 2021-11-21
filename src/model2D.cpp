@@ -78,5 +78,5 @@ Model2D::Model2D(GLfloat vertices[], SDL_Surface* tmp){
 
 
 void Model2D::setTransform(math_utils::mat4 globalTransform){
-    glUniformMatrix4fv(transform, 1, GL_FALSE, globalTransform.getM());
+    glUniformMatrix4fv(transform, 1, GL_FALSE, &globalTransform.getM()[0]);
 }
