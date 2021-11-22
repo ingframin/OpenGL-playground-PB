@@ -17,7 +17,7 @@ Model2D::Model2D(GLfloat vertices[], SDL_Surface* tmp){
     
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*28, vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*32, vertices, GL_STATIC_DRAW);
     
     glGenBuffers(1, &ebo);
     
@@ -45,17 +45,18 @@ Model2D::Model2D(GLfloat vertices[], SDL_Surface* tmp){
      // Specify the layout of the vertex data
     GLint posAttrib = glGetAttribLocation(sp.getProgramID(), "position");
     glEnableVertexAttribArray(posAttrib);
-    glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void *)0);
+    glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *)0);
 
     GLint colAttrib = glGetAttribLocation(sp.getProgramID(), "color");
     glEnableVertexAttribArray(colAttrib);
-    glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void *)(2 * sizeof(GLfloat)));
+    glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
 
     GLint texAttrib = glGetAttribLocation(sp.getProgramID(), "texcoord");
     glEnableVertexAttribArray(texAttrib);
-    glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void *)(5 * sizeof(GLfloat)));
+    glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *)(6 * sizeof(GLfloat)));
 
     transform = glGetUniformLocation(sp.getProgramID(), "transform");
+    //projection = glGetUniformLocation(sp.getProgramID(), "projection");
     int Mode = GL_RGB;
 
     if (tmp->format->BytesPerPixel == 4)
@@ -77,6 +78,13 @@ Model2D::Model2D(GLfloat vertices[], SDL_Surface* tmp){
 }
 
 
+//void Model2D::setTransform(math_utils::mat4 proj,math_utils::mat4 globalTransform){
 void Model2D::setTransform(math_utils::mat4 globalTransform){
+    //glUniformMatrix4fv(projection, 1, GL_FALSE, &proj.getM()[0]);
     glUniformMatrix4fv(transform, 1, GL_FALSE, &globalTransform.getM()[0]);
+}
+
+void Model2D::draw(){
+    // Draw a rectangle from the 2 triangles using 6 indices
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
