@@ -16,10 +16,10 @@ int main(int argc, char **argv)
     Display disp {"OpenGL Playground",1280,720};
     
     auto vertices_v = std::vector<Vertex>();
-    vertices_v.push_back({-0.5f, 0.5f, 0.01f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
-    vertices_v.push_back({ 0.5f, 0.5f, 0.01f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
-    vertices_v.push_back({ 0.5f, -0.5f, 0.01f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
-    vertices_v.push_back({-0.5f, -0.5f, 0.01f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    vertices_v.push_back({-0.5f, 0.5f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    vertices_v.push_back({ 0.5f, 0.5f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    vertices_v.push_back({ 0.5f, -0.5f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    vertices_v.push_back({-0.5f, -0.5f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
 
     GLfloat vertices[] = {
         //  Position      Color             Texcoords
@@ -56,6 +56,7 @@ int main(int argc, char **argv)
     float obZ = 0.0f;
     float sc = 1.0f;
     float ang = 0.0f;
+    auto projection = math_utils::perspective(30,10.0f,0.01f);
 
     while (running)
     {
@@ -115,8 +116,7 @@ int main(int argc, char **argv)
         scaling = math_utils::scale(sc*disp.getRatio(), sc, 1.0f);
 		global_transform = translation.product(rotation.product(scaling));
         m2d.setTransform(global_transform);
-        
-        
+        glUniformMatrix4fv(m2d.projection, 1, GL_FALSE, &projection.getM()[0]);
         m2d.draw();
 
         // Swap buffers

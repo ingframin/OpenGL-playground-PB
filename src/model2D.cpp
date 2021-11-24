@@ -56,7 +56,7 @@ Model2D::Model2D(GLfloat vertices[], SDL_Surface* tmp){
     glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *)(6 * sizeof(GLfloat)));
 
     transform = glGetUniformLocation(sp.getProgramID(), "transform");
-    //projection = glGetUniformLocation(sp.getProgramID(), "projection");
+    projection = glGetUniformLocation(sp.getProgramID(), "projection");
     int Mode = GL_RGB;
 
     if (tmp->format->BytesPerPixel == 4)
