@@ -27,7 +27,7 @@ struct Model2D{
     GLuint transform;
     GLuint projection;
     Model2D(GLfloat vertices[], SDL_Surface* tmp);
-    void setTransform(math_utils::mat4 globalTransform);
+    void setTransform(math_utils::mat4 proj, math_utils::mat4 globalTransform);
     void move(float dx, float dy);
     void rotate(float angle);
     void scale(float sc);

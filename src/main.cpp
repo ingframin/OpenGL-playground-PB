@@ -56,7 +56,7 @@ int main(int argc, char **argv)
     float obZ = 0.0f;
     float sc = 1.0f;
     float ang = 0.0f;
-    auto projection = math_utils::perspective(120,100.0f,0.5f);
+    auto projection = math_utils::perspective(120,100.0f,0.5f,disp.getRatio());
     auto m = projection.getM();
     for(int i = 0; i<4;i++){
         printf("%.4f,%.4f,%.4f,%.4f\n",m[4*i],m[4*i+1],m[4*i+2],m[4*i+3]);
@@ -103,14 +103,14 @@ int main(int argc, char **argv)
             ang -= 0.01f;
         }
         if(keys[SDL_SCANCODE_Y]&&obZ<0){
-            obZ += 0.01f;
+            obZ += 0.1f;
             if(obZ>0){
                 obZ = 0;
             }
             printf("%.3f\n",obZ);
         }
         if(keys[SDL_SCANCODE_H]&&obZ>-5){
-            obZ -= 0.01f;
+            obZ -= 0.1f;
             printf("%.3f\n",obZ);
         }
         // Clear the screen to black
@@ -121,10 +121,9 @@ int main(int argc, char **argv)
         
         rotation = math_utils::rotateZ(ang);
         
-        scaling = math_utils::scale(sc*disp.getRatio(), sc, 1.0f);
+        scaling = math_utils::scale(sc, sc, 1.0f);
 		global_transform = translation.product(rotation.product(scaling));
-        m2d.setTransform(global_transform);
-        glUniformMatrix4fv(m2d.projection, 1, GL_FALSE, &projection.getM()[0]);
+        m2d.setTransform(projection, global_transform);
         m2d.draw();
 
         // Swap buffers

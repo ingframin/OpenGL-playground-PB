@@ -159,14 +159,14 @@ namespace math_utils{
 
 	}
 
-	mat4 perspective(float fov, float far, float near){
+	mat4 perspective(float fov, float far, float near, float asp_ratio){
 		
 		float S = 1.0f/(tan(fov*(M_PI/180)/2));
 		float fn = -(far+near)/(far-near);
 		float fz = -2*far*near/(far-near);
 
 		float proj_matrix[] = {
-			   S, 0.0f, 0.0f,  0.0f,
+			S*asp_ratio, 0.0f, 0.0f,  0.0f,
 			0.0f,    S, 0.0f,  0.0f,
 			0.0f, 0.0f,   fn,    fz,
 			0.0f, 0.0f, -1.0f,  0.0f
