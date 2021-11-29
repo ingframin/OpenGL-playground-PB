@@ -23,15 +23,15 @@ int main(int argc, char **argv)
 
     GLfloat vertices[] = {
         //  Position      Color             Texcoords
-        -0.5f,  0.5f, -0.5f,  1.0f, 0.0f, 0.0f,0.0f, 0.0f, // Top-left
-         0.5f,  0.5f,  -0.5f, 0.0f, 1.0f, 0.0f,1.0f, 0.0f,  // Top-right
-         0.5f, -0.5f,  -0.5f, 0.0f, 0.0f, 1.0f,1.0f, 1.0f, // Bottom-right
-        -0.5f, -0.5f,  -0.5f, 1.0f, 1.0f, 1.0f,0.0f, 1.0f // Bottom-left
+        -0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,0.0f, 0.0f, // Top-left
+         0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 0.0f,1.0f, 0.0f,  // Top-right
+         0.5f, -0.5f,  0.0f, 0.0f, 0.0f, 1.0f,1.0f, 1.0f, // Bottom-right
+        -0.5f, -0.5f,  0.0f, 1.0f, 1.0f, 1.0f,0.0f, 1.0f // Bottom-left
     };
 
     math_utils::mat4 rotation = math_utils::rotateZ(0.0f);
 	math_utils::mat4 scaling = math_utils::scale(1.0f, 1.0f, 1.0f);
-	math_utils::mat4 translation = math_utils::translate(0.0f, 0.0f, 0.0f);
+	math_utils::mat4 translation = math_utils::translate(0.0f, 0.0f, -1.0f);
     
 	math_utils::mat4 global_transform = translation.product(rotation.product(scaling));
 
@@ -56,7 +56,8 @@ int main(int argc, char **argv)
     float obZ = 0.0f;
     float sc = 1.0f;
     float ang = 0.0f;
-    auto projection = math_utils::perspective(120,100.0f,0.5f,disp.getRatio());
+    float angX = 0.0f;
+    auto projection = math_utils::perspective(90,100.0f,0.5f,disp.getRatio());
     auto m = projection.getM();
     for(int i = 0; i<4;i++){
         printf("%.4f,%.4f,%.4f,%.4f\n",m[4*i],m[4*i+1],m[4*i+2],m[4*i+3]);
@@ -117,9 +118,9 @@ int main(int argc, char **argv)
         disp.clear(0.0f,0.0f,0.0f,0.0f);
 
         //Set transformation matrix
-        translation = math_utils::translate(obX, obY, obZ);
-        
-        rotation = math_utils::rotateZ(ang);
+        translation = math_utils::translate(obX, obY, -1+obZ);
+        angX++;
+        rotation = math_utils::rotateZ(ang).product(math_utils::rotateX(0.01*angX));
         
         scaling = math_utils::scale(sc, sc, 1.0f);
 		global_transform = translation.product(rotation.product(scaling));
