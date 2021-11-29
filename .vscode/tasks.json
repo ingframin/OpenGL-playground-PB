@@ -16,7 +16,7 @@
         "./src/ShaderProgram.cpp",
         "./src/Display.cpp",
         "./src/model2D.cpp",
-        "-O3",
+       // "-O3",
         "-o./build/game.exe",
         "-I./include",
         "-L./lib",

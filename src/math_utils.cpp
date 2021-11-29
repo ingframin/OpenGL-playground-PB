@@ -169,7 +169,7 @@ namespace math_utils{
 			   S, 0.0f, 0.0f,  0.0f,
 			0.0f,    S, 0.0f,  0.0f,
 			0.0f, 0.0f,   fn,    fz,
-			0.0f, 0.0f,-1.0f,  0.0f
+			0.0f, 0.0f, 0.0f,  1.0f
 		};
 		return mat4(proj_matrix);
 	}

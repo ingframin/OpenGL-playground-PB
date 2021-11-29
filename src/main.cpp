@@ -16,10 +16,10 @@ int main(int argc, char **argv)
     Display disp {"OpenGL Playground",1280,720};
     
     auto vertices_v = std::vector<Vertex>();
-    vertices_v.push_back({-0.5f, 0.5f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
-    vertices_v.push_back({ 0.5f, 0.5f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
-    vertices_v.push_back({ 0.5f, -0.5f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
-    vertices_v.push_back({-0.5f, -0.5f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    vertices_v.push_back({-0.5f, 0.5f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    vertices_v.push_back({ 0.5f, 0.5f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    vertices_v.push_back({ 0.5f, -0.5f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
+    vertices_v.push_back({-0.5f, -0.5f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
 
     GLfloat vertices[] = {
         //  Position      Color             Texcoords
@@ -56,8 +56,11 @@ int main(int argc, char **argv)
     float obZ = 0.0f;
     float sc = 1.0f;
     float ang = 0.0f;
-    auto projection = math_utils::perspective(30,10.0f,0.01f);
-
+    auto projection = math_utils::perspective(90,1000.0f,0.1f);
+    auto m = projection.getM();
+    for(int i = 0; i<4;i++){
+        printf("%.4f,%.4f,%.4f,%.4f\n",m[4*i],m[4*i+1],m[4*i+2],m[4*i+3]);
+    }
     while (running)
     {
         if (SDL_PollEvent(&windowEvent))
@@ -99,10 +102,10 @@ int main(int argc, char **argv)
         if(keys[SDL_SCANCODE_F]){
             ang -= 0.01f;
         }
-        if(keys[SDL_SCANCODE_Y]){
+        if(keys[SDL_SCANCODE_Y]&&obZ<0.7){
             obZ += 0.01f;
         }
-        if(keys[SDL_SCANCODE_H]){
+        if(keys[SDL_SCANCODE_H]&&obZ>-1){
             obZ -= 0.01f;
         }
         // Clear the screen to black
@@ -111,7 +114,7 @@ int main(int argc, char **argv)
         //Set transformation matrix
         translation = math_utils::translate(obX, obY, obZ);
         
-        rotation = math_utils::rotateZ(ang);
+        rotation = math_utils::rotateZ(ang).product(math_utils::rotateX(M_PI/6).product(math_utils::rotateY(M_PI/6)));
         
         scaling = math_utils::scale(sc*disp.getRatio(), sc, 1.0f);
 		global_transform = translation.product(rotation.product(scaling));

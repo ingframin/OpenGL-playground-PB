@@ -13,6 +13,6 @@ void main()
 {
     Color = color;
     Texcoord = texcoord;
-    gl_Position = transform * projection* vec4(position, 1.0);
+    gl_Position = projection * transform * vec4(position, 1.0);
     //gl_Position = transform * vec4(position, 1.0);
 }
