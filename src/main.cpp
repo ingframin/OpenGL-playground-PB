@@ -13,14 +13,8 @@
 int main(int argc, char **argv)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    Display disp {"OpenGL Playground",1280,720};
+    Display disp {"OpenGL Playground",1600,900};
     
-    auto vertices_v = std::vector<Vertex>();
-    vertices_v.push_back({-0.5f, 0.5f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
-    vertices_v.push_back({ 0.5f, 0.5f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
-    vertices_v.push_back({ 0.5f, -0.5f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
-    vertices_v.push_back({-0.5f, -0.5f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f});
-
     GLfloat vertices[] = {
         //  Position      Color             Texcoords
         -0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,0.0f, 0.0f, // Top-left
@@ -57,7 +51,7 @@ int main(int argc, char **argv)
     float sc = 1.0f;
     float ang = 0.0f;
     float angX = 0.0f;
-    auto projection = math_utils::perspective(90,100.0f,0.5f,disp.getRatio());
+    auto projection = math_utils::perspective(60,200.0f,0.5f,disp.getRatio());
     auto m = projection.getM();
     for(int i = 0; i<4;i++){
         printf("%.4f,%.4f,%.4f,%.4f\n",m[4*i],m[4*i+1],m[4*i+2],m[4*i+3]);

@@ -166,7 +166,7 @@ namespace math_utils{
 		float fz = -2*far*near/(far-near);
 
 		float proj_matrix[] = {
-			S*asp_ratio, 0.0f, 0.0f,  0.0f,
+			S/asp_ratio, 0.0f, 0.0f,  0.0f,
 			0.0f,    S, 0.0f,  0.0f,
 			0.0f, 0.0f,   fn,    fz,
 			0.0f, 0.0f, -1.0f,  0.0f
