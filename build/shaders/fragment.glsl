@@ -11,5 +11,5 @@ float rand(vec2 co)
 
 void main()
 {
-    outColor = texture(tex, Texcoord) * vec4(Color, 1.0)*rand(Texcoord);
+    outColor = texture(tex, Texcoord) * vec4(Color, 1.0);
 }

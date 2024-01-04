@@ -86,10 +86,10 @@ int main(int argc, char **argv)
 			break;
 		}
         if(keys[SDL_SCANCODE_E]&& sc<5.0f){
-            sc += 0.1f;
+            sc += 0.01f;
         }
         if(keys[SDL_SCANCODE_D] && sc>0.25f){
-            sc -= 0.1f;
+            sc -= 0.01f;
         }
         if(keys[SDL_SCANCODE_R]){
             ang += 0.01f;
@@ -113,10 +113,10 @@ int main(int argc, char **argv)
 
         //Set transformation matrix
         translation = math_utils::translate(obX, obY, -1+obZ);
-        angX++;
+        // angX++;
         rotation = math_utils::rotateZ(ang).product(math_utils::rotateX(0.01*angX));
         
-        scaling = math_utils::scale(sc, sc, 1.0f);
+        scaling = math_utils::scale(sc*disp.getRatio(), sc/disp.getRatio(), 1.0f);
 		global_transform = translation.product(rotation.product(scaling));
         m2d.setTransform(projection, global_transform);
         m2d.draw();
@@ -125,9 +125,9 @@ int main(int argc, char **argv)
         disp.update();
         //Control frame rate
         auto dt = (SDL_GetTicks() - lastTime);
-		if (dt < 10)
+		if (dt < 17)
 		{
-			SDL_Delay(10 - dt);
+			SDL_Delay(17 - dt);
 		}
 
 		lastTime = SDL_GetTicks();
