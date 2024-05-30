@@ -7,7 +7,7 @@
 
 static uint64_t entity_ids=0;
 
-Model2D::Model2D(GLfloat vertices[], SDL_Surface* tmp){
+Model2D::Model2D(GLfloat vertices[], int len, SDL_Surface* tmp){
     ID = entity_ids;
     entity_ids++;
     /*This constructor does too many things.
@@ -17,7 +17,7 @@ Model2D::Model2D(GLfloat vertices[], SDL_Surface* tmp){
     
     glGenBuffers(1, &vbo);
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*32, vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float)*len, vertices, GL_STATIC_DRAW);
     
     glGenBuffers(1, &ebo);
     
