@@ -1,6 +1,6 @@
 #include "Vector4.h"
 #include <memory>
-#include <vector>
+#include <array>
 #define _USE_MATH_DEFINES
 #include <cmath>
 #ifndef M_PI
@@ -125,14 +125,9 @@ namespace math_utils{
                 
         
 		
-	std::vector<float> vec4::getV(){
-        auto v = std::vector<float>();
-        v.push_back(x);
-        v.push_back(y);
-        v.push_back(z);
-        v.push_back(w);
-        
-        return v;
+	std::array<float,4> vec4::getV(){
+            
+        return std::array<float,4>{x,y,z,w};
     }
 	
 

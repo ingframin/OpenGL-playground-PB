@@ -4,7 +4,7 @@
 #include "Vector3.h"
 #include "Vector4.h"
 #include <cmath>
-#include <vector>
+#include <array>
 
 
 namespace math_utils{
@@ -18,7 +18,7 @@ namespace math_utils{
         mat4 product(mat4 m);
 		vec4 product(vec4 v);
 		void transpose();
-		std::vector<float> getM();
+		std::array<float,16> getM();
 
 
 	private:
@@ -35,5 +35,6 @@ namespace math_utils{
 	mat4 translate(float dx, float dy, float dz);
 	mat4 scale(float sx, float sy, float sz);
 	mat4 perspective(float fov, float far, float near, float asp_ratio);
-}
+};
+
 #endif

@@ -66,12 +66,9 @@ namespace math_utils{
         return vec2(x*kx,y*ky);
     }
 
-    std::vector<float> vec2::getV(){
-        auto v = std::vector<float>();
-        v.push_back(x);
-        v.push_back(y);
-        
-        return v;
+    std::array<float,2> vec2::getV(){
+               
+        return std::array<float,2>{x,y};
     }
 }
 

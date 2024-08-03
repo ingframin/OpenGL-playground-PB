@@ -1,5 +1,6 @@
 // Headers
 #include <vector>
+#include <array>
 #include <cstdio>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -15,12 +16,12 @@ int main(int argc, char **argv)
     SDL_Init(SDL_INIT_EVERYTHING);
     Display disp {"OpenGL Playground",1600,900};
     
-    GLfloat vertices[] = {
-        //  Position      Color             Texcoords
-        -0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,0.0f, 0.0f, // Top-left
-         0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 0.0f,1.0f, 0.0f,  // Top-right
-         0.5f, -0.5f,  0.0f, 0.0f, 0.0f, 1.0f,1.0f, 1.0f, // Bottom-right
-        -0.5f, -0.5f,  0.0f, 1.0f, 1.0f, 1.0f,0.0f, 1.0f // Bottom-left
+    std::array<GLfloat, 32> vertices = {
+        //  Position         Color             Texcoords
+        -0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // Top-left
+         0.5f,  0.5f,  0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,  // Top-right
+         0.5f, -0.5f,  0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // Bottom-right
+        -0.5f, -0.5f,  0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f // Bottom-left
     };
 
     math_utils::mat4 rotation = math_utils::rotateZ(0.0f);
@@ -39,7 +40,7 @@ int main(int argc, char **argv)
         Mode = GL_RGBA;
     }
     
-    auto m2d = Model2D(vertices,32,tmp);
+    auto m2d = Model2D(vertices.data(),vertices.size(),tmp);
 
     SDL_FreeSurface(tmp);
     bool running = true;
@@ -53,9 +54,11 @@ int main(int argc, char **argv)
     float angX = 0.0f;
     auto projection = math_utils::perspective(60,200.0f,0.5f,disp.getRatio());
     auto m = projection.getM();
+
     for(int i = 0; i<4;i++){
         printf("%.4f,%.4f,%.4f,%.4f\n",m[4*i],m[4*i+1],m[4*i+2],m[4*i+3]);
     }
+    
     while (running)
     {
         if (SDL_PollEvent(&windowEvent))

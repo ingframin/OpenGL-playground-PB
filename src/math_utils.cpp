@@ -174,28 +174,13 @@ namespace math_utils{
 		return mat4(proj_matrix);
 	}
 
-	std::vector<float> mat4::getM(){
-		auto M = std::vector<float>();
-		M.push_back(row1.X());
-		M.push_back(row1.Y());
-		M.push_back(row1.Z());
-		M.push_back(row1.W());
+	std::array<float,16> mat4::getM(){
 		
-		M.push_back(row2.X());
-		M.push_back(row2.Y());
-		M.push_back(row2.Z());
-		M.push_back(row2.W());
-
-		M.push_back(row3.X());
-		M.push_back(row3.Y());
-		M.push_back(row3.Z());
-		M.push_back(row3.W());
-
-		M.push_back(row4.X());
-		M.push_back(row4.Y());
-		M.push_back(row4.Z());
-		M.push_back(row4.W());
-		return M;
+		return std::array<float,16>{
+			row1.X(),row1.Y(),row1.Z(),row1.W(),
+			row2.X(),row2.Y(),row2.Z(),row2.W(),
+			row3.X(),row3.Y(),row3.Z(),row3.W(),
+			row4.X(),row4.Y(),row4.Z(),row4.W()};
 	}
 
 }

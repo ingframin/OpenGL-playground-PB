@@ -1,7 +1,7 @@
 #include "Vector3.h"
 #define _USE_MATH_DEFINES
 #include <cmath>
-#include <vector>
+#include <array>
 #ifndef M_PI
     #define M_PI 3.14159265358979323846
 #endif
@@ -114,10 +114,9 @@ namespace math_utils{
         return vec3(x*kx,y*ky,z*kz);
     }
 
-    std::vector<float> vec3::getV(){
-        auto v = std::vector<float>{x,y,z};
-        
-        return v;
+    std::array<float,3> vec3::getV(){
+               
+        return std::array<float,3>{x,y,z};
     }
 
 }

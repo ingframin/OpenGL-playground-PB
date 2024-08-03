@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <vector>
+#include <array>
 
 namespace math_utils{
 
@@ -30,7 +30,7 @@ namespace math_utils{
         float Y(){return y;}
         float Z(){return z;}
 
-        std::vector<float> getV();
+        std::array<float,3> getV();
 
         private:
         float x,y,z;
