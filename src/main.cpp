@@ -55,10 +55,6 @@ int main(int argc, char **argv)
     auto projection = math_utils::perspective(60,200.0f,0.5f,disp.getRatio());
     auto m = projection.getM();
 
-    for(int i = 0; i<4;i++){
-        printf("%.4f,%.4f,%.4f,%.4f\n",m[4*i],m[4*i+1],m[4*i+2],m[4*i+3]);
-    }
-    
     while (running)
     {
         if (SDL_PollEvent(&windowEvent))
