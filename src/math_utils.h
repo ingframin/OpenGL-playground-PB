@@ -13,12 +13,12 @@ namespace math_utils{
 	class mat4{
 	public:
 
-		mat4(const float* mc);
+		mat4(const double* mc);
 		mat4();
 		mat4 product(mat4 m);
 		vec4 product(vec4 v);
 		void transpose();
-		std::vector<float> getM();
+		std::vector<double> getM();
 
 
 	private:
@@ -29,11 +29,11 @@ namespace math_utils{
 
 	};
 
-	mat4 rotateX(float ang);
-	mat4 rotateY(float ang);
-	mat4 rotateZ(float ang);
-	mat4 translate(float dx, float dy, float dz);
-	mat4 scale(float sx, float sy, float sz);
-	mat4 perspective(float fov, float far, float near, float asp_ratio);
+	mat4 rotateX(double ang);
+	mat4 rotateY(double ang);
+	mat4 rotateZ(double ang);
+	mat4 translate(double dx, double dy, double dz);
+	mat4 scale(double sx, double sy, double sz);
+	mat4 perspective(double fov, double far, double near, double asp_ratio);
 }
 #endif
