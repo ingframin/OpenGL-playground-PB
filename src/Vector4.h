@@ -20,7 +20,7 @@ class vec4{
         vec4 rotateX(float angle);
         vec4 rotateY(float angle);
         vec4 rotateZ(float angle);
-        vec4 scale(float kx, float ky, float kz);
+        vec4 scale(float kx, float ky, float kz, float kw);
         
                 
         float X(){return x;}

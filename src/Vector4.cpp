@@ -31,25 +31,11 @@ namespace math_utils{
     }
     
     vec4 vec4::add(const vec4& v){
-        float wt = (w+v.w)/2;
-        if(wt > 0){
-            wt = 1.0;
-        }
-        else{
-            wt = 0;
-        }
-        return vec4(x+v.x,y+v.y,z+v.z,wt);
+        return vec4(x+v.x,y+v.y,z+v.z,w+v.w);
     }
 
     vec4 vec4::sub(const vec4& v){
-        float wt = (w+v.w)/2;
-        if(wt > 0){
-            wt = 1.0;
-        }
-        else{
-            wt = 0;
-        }
-        return vec4(x-v.x,y-v.y,z-v.z,wt);
+        return vec4(x-v.x,y-v.y,z-v.z,w-v.w);
 
     }
         
@@ -131,8 +117,8 @@ namespace math_utils{
         return tmp;
     }
 
-    vec4 vec4::scale(float kx, float ky, float kz){
-        return vec4(x*kx,y*ky,z*kz,w);
+    vec4 vec4::scale(float kx, float ky, float kz, float kw){
+        return vec4(x*kx,y*ky,z*kz,w*kw);
 
     }
         
