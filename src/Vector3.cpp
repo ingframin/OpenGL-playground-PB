@@ -13,7 +13,7 @@ namespace math_utils{
         z = 0.0f;
     }
 
-    vec3::vec3(float x, float y, float z){
+    vec3::vec3(double x, double y, double z){
         this->x = x;
         this->y = y;
         this->z = z;
@@ -27,35 +27,35 @@ namespace math_utils{
         return vec3(x-v.x,y-v.y,z-v.z);
     }
 
-    float vec3::mod(){
-        return sqrtf(x*x+y*y+z*z);
+    double vec3::mod(){
+        return sqrt(x*x+y*y+z*z);
     }
 
-    float vec3::dot_product(const vec3& v){
+    double vec3::dot_product(const vec3& v){
         return x*v.x + y*v.y + z*v.z;
     }
         
     vec3 vec3::cross_product(const vec3& v){
-        float nx = y*v.z - z*v.y; 
-        float ny = z*v.x - x*v.z;
-        float nz = x*v.y - y*v.x;
+        double nx = y*v.z - z*v.y; 
+        double ny = z*v.x - x*v.z;
+        double nz = x*v.y - y*v.x;
         return vec3(nx,ny,nz);
     }
     
     vec3 vec3::norm(){
         auto m = mod();
-        float nx = x/m;
-        float ny = y/m;
-        float nz = z/m;
+        double nx = x/m;
+        double ny = y/m;
+        double nz = z/m;
         return vec3(nx,ny,nz);
     }
 
-    vec3 vec3::rotateX(float angle){
+    vec3 vec3::rotateX(double angle){
         auto m = mod();
         auto tmp = norm();
 
-        float ca = cos(angle);
-		float sa = sin(angle);
+        double ca = cos(angle);
+		double sa = sin(angle);
         if(ca>1 || ca<-1){
 			ca = ca/abs(ca);
 		}
@@ -69,12 +69,12 @@ namespace math_utils{
 
     }
     
-    vec3 vec3::rotateY(float angle){
+    vec3 vec3::rotateY(double angle){
         auto m = mod();
         auto tmp = norm();
 
-        float ca = cos(angle);
-		float sa = sin(angle);
+        double ca = cos(angle);
+		double sa = sin(angle);
         if(ca>1 || ca<-1){
 			ca = ca/abs(ca);
 		}
@@ -87,12 +87,12 @@ namespace math_utils{
         return tmp;
     }
     
-    vec3 vec3::rotateZ(float angle){
+    vec3 vec3::rotateZ(double angle){
         auto m = mod();
         auto tmp = norm();
 
-        float ca = cos(angle);
-		float sa = sin(angle);
+        double ca = cos(angle);
+		double sa = sin(angle);
         if(ca>1 || ca<-1){
 			ca = ca/abs(ca);
 		}
@@ -106,16 +106,16 @@ namespace math_utils{
 
     }
     
-    float vec3::distance(const vec3& v){
+    double vec3::distance(const vec3& v){
         return sub(v).mod();
     }
 
-    vec3 vec3::scale(float kx, float ky, float kz){
+    vec3 vec3::scale(double kx, double ky, double kz){
         return vec3(x*kx,y*ky,z*kz);
     }
 
-    std::vector<float> vec3::getV(){
-        auto v = std::vector<float>{x,y,z};
+    std::vector<double> vec3::getV(){
+        auto v = std::vector<double>{x,y,z};
         
         return v;
     }

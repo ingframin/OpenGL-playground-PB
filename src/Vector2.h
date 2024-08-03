@@ -7,27 +7,27 @@ namespace math_utils{
     class vec2{
         public:
         vec2();
-        vec2(float x, float y);
+        vec2(double x, double y);
         vec2 add(const vec2& v);
         vec2 sub(const vec2& v);
         
-        float mod();
+        double mod();
         vec2 norm();
-        float distance(const vec2& v);
+        double distance(const vec2& v);
 
-        float dot_product(const vec2& v);
+        double dot_product(const vec2& v);
 
-        vec2 rotate(float angle);
-        vec2 scale(float kx, float ky);
+        vec2 rotate(double angle);
+        vec2 scale(double kx, double ky);
         
                 
-        float X(){return x;}
-        float Y(){return y;}
+        double X(){return x;}
+        double Y(){return y;}
 
-        std::vector<float> getV();
+        std::vector<double> getV();
 
         private:
-        float x,y;
+        double x,y;
 
     };
 }
