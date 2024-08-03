@@ -113,8 +113,8 @@ int main(int argc, char **argv)
 
         //Set transformation matrix
         translation = math_utils::translate(obX, obY, -1+obZ);
-        // angX++;
-        rotation = math_utils::rotateZ(ang).product(math_utils::rotateX(0.01*angX)).product(math_utils::rotateY(0.01*angX));
+        angX++;
+        rotation = math_utils::rotateZ(ang).product(math_utils::rotateX(0.01*angX));
         
         scaling = math_utils::scale(sc*disp.getRatio(), sc/disp.getRatio(), 1.0f);
 		global_transform = translation.product(rotation.product(scaling));

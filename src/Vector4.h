@@ -5,33 +5,33 @@ namespace math_utils{
 
 class vec4{
 	public:
-		vec4(double x, double y, double z, double w);
+		vec4(float x, float y, float z, float w);
 		vec4();
         vec4(const vec4& v);
         vec4 add(const vec4& v);
         vec4 sub(const vec4& v);
         
-        double mod();
+        float mod();
         vec4 norm();
-        double distance(const vec4& v);
+        float distance(const vec4& v);
 
-        double dot_product(const vec4& v);
+        float dot_product(const vec4& v);
         vec4 cross_product(const vec4& v);
         
-        vec4 rotateX(double angle);
-        vec4 rotateY(double angle);
-        vec4 rotateZ(double angle);
-        vec4 scale(double kx, double ky, double kz, double kw);
+        vec4 rotateX(float angle);
+        vec4 rotateY(float angle);
+        vec4 rotateZ(float angle);
+        vec4 scale(float kx, float ky, float kz, float kw);
         
                 
-        double X(){return x;}
-        double Y(){return y;}
-        double Z(){return z;}
-        double W(){return w;}
+        float X(){return x;}
+        float Y(){return y;}
+        float Z(){return z;}
+        float W(){return w;}
 		
-		std::vector<double> getV();
+		std::vector<float> getV();
 
 	private:
-		double x,y,z,w;
+		float x,y,z,w;
 	};
 }

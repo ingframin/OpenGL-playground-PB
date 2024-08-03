@@ -15,7 +15,7 @@ namespace math_utils{
         y = 0;
     }
 
-    vec2::vec2(double x, double y){
+    vec2::vec2(float x, float y){
         this->x = x;
         this->y = y;
     }
@@ -28,28 +28,28 @@ namespace math_utils{
         return vec2(x-v.x,y-v.y);
     }
     
-    double vec2::mod(){
-        return sqrt(x*x+y*y);
+    float vec2::mod(){
+        return sqrtf(x*x+y*y);
     }
 
     vec2 vec2::norm(){
         return vec2(x/mod(),y/mod());
     }
 
-    double vec2::distance(const vec2& v){
+    float vec2::distance(const vec2& v){
         return sub(v).mod();
     }
 
-    double vec2::dot_product(const vec2& v){
+    float vec2::dot_product(const vec2& v){
         return x*v.x+y*v.y;
     }
 
-    vec2 vec2::rotate(double angle){
+    vec2 vec2::rotate(float angle){
         auto m = mod();
         auto tmp = norm();
 
-        double ca = cos(angle);
-		double sa = sin(angle);
+        float ca = cos(angle);
+		float sa = sin(angle);
         if(ca>1 || ca<-1){
 			ca = ca/abs(ca);
 		}
@@ -62,12 +62,12 @@ namespace math_utils{
         return tmp;
     }
 
-    vec2 vec2::scale(double kx, double ky){
+    vec2 vec2::scale(float kx, float ky){
         return vec2(x*kx,y*ky);
     }
 
-    std::vector<double> vec2::getV(){
-        auto v = std::vector<double>();
+    std::vector<float> vec2::getV(){
+        auto v = std::vector<float>();
         v.push_back(x);
         v.push_back(y);
         

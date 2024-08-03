@@ -15,7 +15,7 @@ namespace math_utils{
 		z = 0;
 		w = 1;
 	}
-	vec4::vec4(double x, double y, double z, double w){
+	vec4::vec4(float x, float y, float z, float w){
 		this->x = x;
 	    this->y = y;
 		this->z = z;
@@ -39,33 +39,33 @@ namespace math_utils{
 
     }
         
-    double vec4::mod(){
-        return sqrt(x*x+y*y+z*z+w*w);
+    float vec4::mod(){
+        return sqrtf(x*x+y*y+z*z+w*w);
     }
     
     vec4 vec4::norm(){
         auto m = mod();
-        double nx = x/m;
-        double ny = y/m;
-        double nz = z/m;
+        float nx = x/m;
+        float ny = y/m;
+        float nz = z/m;
         
         return vec4(nx,ny,nz,1.0);
     }
     
-    double vec4::distance(const vec4& v){
+    float vec4::distance(const vec4& v){
         return sub(v).mod();
     }
 
-    double vec4::dot_product(const vec4& v){
+    float vec4::dot_product(const vec4& v){
         return x*v.x+y*v.y+z*v.z+w*v.w;
     }
     
-    vec4 vec4::rotateX(double angle){
+    vec4 vec4::rotateX(float angle){
         auto m = mod();
         auto tmp = norm();
 
-        double ca = cos(angle);
-		double sa = sin(angle);
+        float ca = cos(angle);
+		float sa = sin(angle);
         if(ca>1 || ca<-1){
 			ca = ca/abs(ca);
 		}
@@ -79,12 +79,12 @@ namespace math_utils{
         return tmp;
 
     }
-    vec4 vec4::rotateY(double angle){
+    vec4 vec4::rotateY(float angle){
         auto m = mod();
         auto tmp = norm();
 
-        double ca = cos(angle);
-		double sa = sin(angle);
+        float ca = cos(angle);
+		float sa = sin(angle);
         if(ca>1 || ca<-1){
 			ca = ca/abs(ca);
 		}
@@ -98,12 +98,12 @@ namespace math_utils{
         return tmp;
     }
 
-    vec4 vec4::rotateZ(double angle){
+    vec4 vec4::rotateZ(float angle){
         auto m = mod();
         auto tmp = norm();
 
-        double ca = cos(angle);
-		double sa = sin(angle);
+        float ca = cos(angle);
+		float sa = sin(angle);
         if(ca>1 || ca<-1){
 			ca = ca/abs(ca);
 		}
@@ -117,7 +117,7 @@ namespace math_utils{
         return tmp;
     }
 
-    vec4 vec4::scale(double kx, double ky, double kz, double kw){
+    vec4 vec4::scale(float kx, float ky, float kz, float kw){
         return vec4(x*kx,y*ky,z*kz,w*kw);
 
     }
@@ -125,8 +125,8 @@ namespace math_utils{
                 
         
 		
-	std::vector<double> vec4::getV(){
-        auto v = std::vector<double>();
+	std::vector<float> vec4::getV(){
+        auto v = std::vector<float>();
         v.push_back(x);
         v.push_back(y);
         v.push_back(z);

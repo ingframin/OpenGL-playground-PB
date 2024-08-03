@@ -11,7 +11,7 @@ namespace math_utils{
 
 /**************************************************/
 
-	mat4::mat4(const double mc[16]){
+	mat4::mat4(const float mc[16]){
 		row1 = {mc[0],mc[1],mc[2],mc[3]};
 		row2 = {mc[4],mc[5],mc[6],mc[7]};
 		row3 = {mc[8],mc[9],mc[10],mc[11]};
@@ -79,16 +79,16 @@ namespace math_utils{
 	}
 
 	
-	mat4 rotateX(double ang){
-		double ca = cos(ang);
-		double sa = sin(ang);
+	mat4 rotateX(float ang){
+		float ca = cos(ang);
+		float sa = sin(ang);
 		if(ca>1 || ca<-1){
 			ca = ca/abs(ca);
 		}
 		if(sa>1 || sa<-1){
 			sa = sa/abs(sa);
 		}
-		double res[16] = {
+		float res[16] = {
 			1, 0, 0, 0,
 			0, ca, -sa, 0,
 			0, sa, ca, 0,
@@ -98,16 +98,16 @@ namespace math_utils{
 		return mat4(res);
 	}
 
-	mat4 rotateY(double ang){
-		double ca = cos(ang);
-		double sa = sin(ang);
+	mat4 rotateY(float ang){
+		float ca = cos(ang);
+		float sa = sin(ang);
 		if(ca>1 || ca<-1){
 			ca = ca/abs(ca);
 		}
 		if(sa>1 || sa<-1){
 			sa = sa/abs(sa);
 		}
-		double res[16] = {
+		float res[16] = {
 			ca,  0, sa, 0,
 			 0,  1, 0, 0,
 			-sa, 0, ca, 0,
@@ -116,16 +116,16 @@ namespace math_utils{
 		
 		return mat4(res);
 	}
-	mat4 rotateZ(double ang){
-		double ca = cos(ang);
-		double sa = sin(ang);
+	mat4 rotateZ(float ang){
+		float ca = cos(ang);
+		float sa = sin(ang);
 		if(ca>1 || ca<-1){
 			ca = ca/abs(ca);
 		}
 		if(sa>1 || sa<-1){
 			sa = sa/abs(sa);
 		}
-		double res[16] = {
+		float res[16] = {
 			ca, -sa, 0, 0,
 			sa,  ca, 0, 0,
 			0,    0, 1, 0,
@@ -135,9 +135,9 @@ namespace math_utils{
 		return mat4(res);
 	}
 
-	mat4 translate(double dx, double dy, double dz){
+	mat4 translate(float dx, float dy, float dz){
 
-		double translation_matrix[] = {
+		float translation_matrix[] = {
 			1.0f, 0.0f, 0.0f, dx,
 			0.0f, 1.0f, 0.0f, dy,
 			0.0f, 0.0f, 1.0f, dz,
@@ -148,8 +148,8 @@ namespace math_utils{
 
 	}
 
-	mat4 scale(double sx, double sy, double sz){
-		double scale_matrix[] = {
+	mat4 scale(float sx, float sy, float sz){
+		float scale_matrix[] = {
 			sx, 0.0f, 0.0f, 0.0f,
 			0.0f, sy, 0.0f, 0.0f,
 			0.0f, 0.0f, sz, 0.0f,
@@ -159,13 +159,13 @@ namespace math_utils{
 
 	}
 
-	mat4 perspective(double fov, double far, double near, double asp_ratio){
+	mat4 perspective(float fov, float far, float near, float asp_ratio){
 		
-		double S = 1.0f/(tan(fov*(M_PI/180)/2));
-		double fn = -(far+near)/(far-near);
-		double fz = -2*far*near/(far-near);
+		float S = 1.0f/(tan(fov*(M_PI/180)/2));
+		float fn = -(far+near)/(far-near);
+		float fz = -2*far*near/(far-near);
 
-		double proj_matrix[] = {
+		float proj_matrix[] = {
 			S/asp_ratio, 0.0f, 0.0f,  0.0f,
 			0.0f,    S, 0.0f,  0.0f,
 			0.0f, 0.0f,   fn,    fz,
@@ -174,8 +174,8 @@ namespace math_utils{
 		return mat4(proj_matrix);
 	}
 
-	std::vector<double> mat4::getM(){
-		auto M = std::vector<double>();
+	std::vector<float> mat4::getM(){
+		auto M = std::vector<float>();
 		M.push_back(row1.X());
 		M.push_back(row1.Y());
 		M.push_back(row1.Z());
