@@ -7,9 +7,29 @@
 #include <iostream>
 
 namespace math_utils{
-	
+	mat4::mat4(float a, float b, float c, float d, float e, float f, float g, float h, float i, float j, float k, float l, float m, float n, float o, float p){
+		row1 = {a,b,c,d};
+		row2 = {e,f,g,h};
+		row3 = {i,j,k,l};
+		row4 = {m,n,o,p};
+	}
 
 /**************************************************/
+
+	mat4::mat4(const vec4 r1, const vec4 r2, const vec4 r3, const vec4 r4){
+		row1 = r1;
+		row2 = r2;
+		row3 = r3;
+		row4 = r4;
+	}
+
+	mat4::mat4(const mat4& m){
+		row1 = m.row1;
+		row2 = m.row2;
+		row3 = m.row3;
+		row4 = m.row4;
+	}
+
 
 	mat4::mat4(const float mc[16]){
 		row1 = {mc[0],mc[1],mc[2],mc[3]};
@@ -25,6 +45,14 @@ namespace math_utils{
 		row4 = {0,0,0,1};
 	}
 	
+	mat4& mat4::operator=(const mat4& m){
+		row1 = m.row1;
+		row2 = m.row2;
+		row3 = m.row3;
+		row4 = m.row4;
+		return *this;
+	}
+
 	void mat4::transpose(){
 		row1 = {row1.X(),row2.X(),row3.X(),row4.X()};
 		row2 = {row1.Y(),row2.Y(),row3.Y(),row4.Y()};

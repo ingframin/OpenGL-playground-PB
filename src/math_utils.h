@@ -14,7 +14,11 @@ namespace math_utils{
 	public:
 
 		mat4(const float mc[16]);
+		mat4(const vec4 r1, const vec4 r2, const vec4 r3, const vec4 r4);
         mat4();
+		mat4(float r1, float r2, float r3, float r4, float r5, float r6, float r7, float r8, float r9, float r10, float r11, float r12, float r13, float r14, float r15, float r16);
+		mat4(const mat4& m);
+		mat4& operator=(const mat4& m);
         mat4 product(mat4 m);
 		vec4 product(vec4 v);
 		void transpose();
